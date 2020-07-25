@@ -17,17 +17,17 @@
 }?>
 
   <?php wp_head()?>
-  <link rel="stylesheet" type="text/css" href="<?php echo get_template_directory_uri(); ?>/assets/dist/main.css">
+  <link rel="stylesheet" type="text/css" href="<?php echo get_template_directory_uri(); ?>/assets/dist/main.css?<?=time();?>">
 
 </head>
 
 <body <?php body_class();?>>
 
 
-  <div class="header">
-    <div class="container-fluid">
+  <header class="header">
+    <div class="container">
       <nav class="navbar navbar-expand-lg navbar-dark">
-        <a class="navbar-brand" href="/"><img src="<?php echo get_template_directory_uri(); ?>/assets/img/logo.png" /></a>
+        <a class="navbar-brand" href="/"><img src="<?php echo get_template_directory_uri(); ?>/assets/img/logo--blue.svg" /></a>
         <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavDropdown" aria-controls="navbarNavDropdown" aria-expanded="false" aria-label="Toggle navigation">
           <span class="navbar-toggler-icon"></span>
         </button>
@@ -47,4 +47,4 @@ wp_nav_menu([
         </div>
       </nav>
     </div>
-  </div>
+  </header>

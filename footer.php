@@ -34,7 +34,7 @@ wp_nav_menu([
 
 </footer>
 
-<script src="<?php echo get_template_directory_uri(); ?>/assets/dist/main.js"></script>
+<script src="<?php echo get_template_directory_uri(); ?>/assets/dist/main.js?<?=time();?>"></script>
 
 <?php wp_footer();?>
 </body>

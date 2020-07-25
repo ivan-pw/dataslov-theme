@@ -26,14 +26,14 @@ module.exports = {
         ],
       },
       {
-        test: /\.scss$/,
+        test: /\.(scss)$/,
         use: [
           'style-loader',
           MiniCssExtractPlugin.loader,
           {
             loader: 'css-loader', options: {
               sourceMap: true,
-              modules: true,
+              modules: false,
             },
           },
           {
@@ -46,7 +46,8 @@ module.exports = {
             },
           },
           {
-            loader: 'sass-loader', options: {
+            loader: 'sass-loader',
+            options: {
               sourceMap: true,
             },
           },
