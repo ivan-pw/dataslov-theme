@@ -21,28 +21,29 @@ add_action('init', 'register_post_types');
 function register_post_types()
 {
     $labels = [
-        'name'               => 'Точки продаж',
-        'singular_name'      => 'Точки продаж', // админ панель Добавить->Функцию
-        'add_new'            => 'Добавить Точки продаж',
-        'add_new_item'       => 'Добавить новый Точки продаж', // заголовок тега <title>
-        'edit_item'          => 'Редактировать Точки продаж',
-        'new_item'           => 'Новое Точки продаж',
-        'all_items'          => 'Все Точки продаж',
-        'view_item'          => 'Просмотр Точки продаж на сайте',
-        'search_items'       => 'Искать Точки продаж',
-        'not_found'          => 'Точки продаж не найдено.',
-        'not_found_in_trash' => 'В корзине нет Точки продаж.',
-        'menu_name'          => 'Точки продаж', // ссылка в меню в админке
+        'name'               => 'Слово',
+        'singular_name'      => 'Слово', // админ панель Добавить->Функцию
+        'add_new'            => 'Добавить Слово',
+        'add_new_item'       => 'Добавить новое Слово', // заголовок тега <title>
+        'edit_item'          => 'Редактировать Слово',
+        'new_item'           => 'Новое Слово',
+        'all_items'          => 'Все Слова',
+        'view_item'          => 'Просмотр Слова на сайте',
+        'search_items'       => 'Искать Слово',
+        'not_found'          => 'Слово не найдено.',
+        'not_found_in_trash' => 'В корзине нет Слова.',
+        'menu_name'          => 'Слова', // ссылка в меню в админке
     ];
     $args = [
         'labels'        => $labels,
         'public'        => false,
         'show_ui'       => true, // показывать интерфейс в админке
+        'show_in_rest'  => true,
         'has_archive'   => false,
         'menu_position' => 20, // порядок в меню
         'supports'      => ['title', 'editor', 'author', 'thumbnail'],
     ];
-    register_post_type('shop', $args);
+    register_post_type('word', $args);
 
     $labels = [
         'name'               => 'Продукт',
