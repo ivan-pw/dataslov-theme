@@ -16,8 +16,6 @@ function register_navwalker()
 }
 add_action('after_setup_theme', 'register_navwalker');
 
-add_action('init', 'register_post_types');
-
 function register_post_types()
 {
     $labels = [
@@ -45,30 +43,73 @@ function register_post_types()
     ];
     register_post_type('word', $args);
 
-    $labels = [
-        'name'               => 'Продукт',
-        'singular_name'      => 'Продукт', // админ панель Добавить->Функцию
-        'add_new'            => 'Добавить Продукт',
-        'add_new_item'       => 'Добавить новый Продукт', // заголовок тега <title>
-        'edit_item'          => 'Редактировать Продукт',
-        'new_item'           => 'Новый Продукт',
-        'all_items'          => 'Все Продукты',
-        'view_item'          => 'Просмотр Продуктов на сайте',
-        'search_items'       => 'Искать Продукт',
-        'not_found'          => 'Продукт не найден.',
-        'not_found_in_trash' => 'В корзине нет Продуктов.',
-        'menu_name'          => 'Продукты', // ссылка в меню в админке
-    ];
-    $args = [
-        'labels'        => $labels,
-        'public'        => true,
-        'show_ui'       => true, // показывать интерфейс в админке
-        'has_archive'   => false,
-        'menu_position' => 20, // порядок в меню
-        'supports'      => ['title', 'editor', 'author', 'thumbnail'],
-    ];
-    register_post_type('product', $args);
+    /*
+$labels = [
+'name'               => 'Продукт',
+'singular_name'      => 'Продукт', // админ панель Добавить->Функцию
+'add_new'            => 'Добавить Продукт',
+'add_new_item'       => 'Добавить новый Продукт', // заголовок тега <title>
+'edit_item'          => 'Редактировать Продукт',
+'new_item'           => 'Новый Продукт',
+'all_items'          => 'Все Продукты',
+'view_item'          => 'Просмотр Продуктов на сайте',
+'search_items'       => 'Искать Продукт',
+'not_found'          => 'Продукт не найден.',
+'not_found_in_trash' => 'В корзине нет Продуктов.',
+'menu_name'          => 'Продукты', // ссылка в меню в админке
+];
+$args = [
+'labels'        => $labels,
+'public'        => true,
+'show_ui'       => true, // показывать интерфейс в админке
+'has_archive'   => false,
+'menu_position' => 20, // порядок в меню
+'supports'      => ['title', 'editor', 'author', 'thumbnail'],
+];
+register_post_type('product', $args);
+ */
 }
+add_action('init', 'register_post_types');
+
+function add_custom_taxonomies()
+{
+// Labels part for the GUI
+
+    $labels = array(
+        'name'                       => _x('Год', 'taxonomy general name'),
+        'singular_name'              => _x('Год', 'taxonomy singular name'),
+        'search_items'               => __('Найти Год'),
+        'popular_items'              => __('Popular Topics'),
+        'all_items'                  => __('Все Года'),
+        'parent_item'                => null,
+        'parent_item_colon'          => null,
+        'edit_item'                  => __('Изменить Год'),
+        'update_item'                => __('Обновить Год'),
+        'add_new_item'               => __('Добавить новый Год'),
+        'new_item_name'              => __('New Topic Name'),
+        'separate_items_with_commas' => __('Separate topics with commas'),
+        'add_or_remove_items'        => __('Add or remove topics'),
+        'choose_from_most_used'      => __('Choose from the most used topics'),
+        'menu_name'                  => __('Года'),
+    );
+
+// Now register the non-hierarchical taxonomy like tag
+
+    register_taxonomy('word_year', 'word', array(
+        'hierarchical'          => false,
+        'labels'                => $labels,
+        'show_ui'               => true,
+        'show_in_menu'          => true,
+        'show_in_nav_menus'     => true,
+        'show_in_rest'          => true,
+        'show_admin_column'     => true,
+        'update_count_callback' => '_update_post_term_count',
+        'query_var'             => true,
+        'rewrite'               => array('slug' => 'word_year'),
+        'show_in_quick_edit'    => true,
+    ));
+}
+add_action('init', 'add_custom_taxonomies', 0);
 
 //remove_filter( 'the_content', 'wpautop' );
 //remove_filter( 'the_excerpt', 'wpautop' );
@@ -98,3 +139,20 @@ add_action('after_setup_theme', function () {
         'footer_menu_3' => 'Меню в подвале 3',
     ]);
 });
+
+function filter_rest_work_query($args, $request)
+{
+    $params = $request->get_params();
+    if (isset($params['word_year_slug'])) {
+        $args['tax_query'] = array(
+            array(
+                'taxonomy' => 'word_year',
+                'field'    => 'slug',
+                'terms'    => explode(',', $params['word_year_slug']),
+            ),
+        );
+    }
+    return $args;
+}
+// add the filter
+add_filter("rest_work_query", 'filter_rest_work_query', 10, 2);

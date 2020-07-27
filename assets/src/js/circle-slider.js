@@ -8,10 +8,19 @@
  * Copyright 2018, COIDEA
  * https://coidea.website
  */
-$(function() {
+
+// console.log($);
+
+
+import imagesLoaded from 'imagesloaded';
+imagesLoaded.makeJQueryPlugin( $ );
+import {TweenMax, CSSPlugin, TextPlugin, Sine} from 'gsap/all';
+
+
+export function startCircleSlider() {
   $('.slideshow').imagesLoaded({background: true})
       .done( function() {
-        // hide loader
+      // hide loader
         $('.loader').addClass('is-loaded');
 
         // init variables
@@ -74,7 +83,7 @@ $(function() {
               })
               .staggerTo(navigationItem.find('.background-holder'), 0.6, {
                 cycle: {
-                  // function that returns a value
+                // function that returns a value
                   rotation: function(index, element) {
                     return -90 - Number($(element).prev('.rotate-holder').text()) + rotation + type;
                   },
@@ -124,4 +133,4 @@ $(function() {
       }
     });
   })();
-});
+};

@@ -1,8 +1,8 @@
 'use strict';
-import $ from 'jquery';
+window.$ = window.jQuery = require('jquery');
 import 'popper.js';
 import 'bootstrap';
-// import './circle-slider';
+import {startCircleSlider} from './circle-slider';
 import {AnalogClock} from 'analog-clock';
 import '../scss/style.scss';
 
@@ -43,4 +43,37 @@ window.addEventListener('DOMContentLoaded', ()=>{
     }
   }
   clockStart();
+
+  // года http://dataslov.ru/wp-json/wp/v2/word_year
+  // год http://dataslov.ru/wp-json/wp/v2/word_year?slug=2020
+  // посты за год по id http://dataslov.ru/wp-json/wp/v2/word?word_year=7
+
+
+  const sliderNav = document.querySelector('section.words-slider ul.navigation');
+
+  fetch('http://dataslov.ru/wp-json/wp/v2/word_year')
+      .then((response) => {
+        return response.json();
+      })
+      .then((data) => {
+        console.log(data);
+
+        let items = '';
+
+        data.forEach((el) => {
+          items += `
+            <li class="navigation-item">
+              <span class="rotate-holder"></span>
+              <span class="background-holder" style="">${el.name}</span>
+            </li>
+            `;
+        });
+        sliderNav.insertAdjacentHTML('afterbegin', items);
+        return data;
+      })
+      .then((data) => {
+        {
+          startCircleSlider();
+        }
+      });
 });

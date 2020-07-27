@@ -1,4 +1,6 @@
 const devMode = process.env.NODE_ENV !== 'production';
+const path = require('path');
+const webpack = require('webpack');
 
 const MiniCssExtractPlugin = require('mini-css-extract-plugin');
 
@@ -62,6 +64,11 @@ module.exports = {
   plugins: [
     new MiniCssExtractPlugin({
       filename: '[name].css',
+    }),
+    new webpack.ProvidePlugin({
+      $: 'jquery',
+      jQuery: 'jquery',
+      imagesLoaded: 'imagesloaded',
     }),
   ],
 };
