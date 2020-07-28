@@ -23,6 +23,39 @@
               .clock>svg {
                 display: none;
               }
+
+              #hour,
+              #minute {
+                background: transparent;
+              }
+
+              #second {
+                background: #0e4c80;
+              }
+
+
+              #hour:before,
+              #minute:before {
+                content: '';
+                position: absolute;
+                display: block;
+                bottom: 0;
+              }
+
+              #hour:before {
+                background: transparent url(http://dataslov.ru/wp-content/themes/dataslov/assets/img/clock-arrows/arrow-3.svg) no-repeat bottom center / contain;
+                width: 600%;
+                height: 500%;
+                left: -229%;
+              }
+
+              #minute:before {
+                background: transparent url(http://dataslov.ru/wp-content/themes/dataslov/assets/img/clock-arrows/arrow-1.svg) no-repeat bottom center / contain;
+                width: 627%;
+                height: 146%;
+                left: -269%;
+                bottom: -15%;
+              }
               </style>
 
             </div>
@@ -35,129 +68,14 @@
   <section class="words-slider">
     <div class="container">
       <div class="row">
-        <div class="col-12 col-md-8 ">
-          <div class="slideshow">
-
-            <ul class="navigation">
-
-              <li class="navigation-item active">
-                <span class="rotate-holder"></span>
-                <span class="background-holder" style="background-image: url(<?php echo get_template_directory_uri(); ?>/assets/img/circle-slider/img-1.jpeg);"></span>
-              </li>
-              <!-- slideshow:navigation:item END -->
-
-              <!-- slideshow:navigation:item START -->
-              <li class="navigation-item">
-                <span class="rotate-holder"></span>
-                <span class="background-holder" style="background-image: url(<?php echo get_template_directory_uri(); ?>/assets/img/circle-slider/statue.jpg);"></span>
-              </li>
-
-              <li class="navigation-item">
-                <span class="rotate-holder"></span>
-                <span class="background-holder" style="background-image: url(<?php echo get_template_directory_uri(); ?>/assets/img/circle-slider/img-3.jpg);"></span>
-              </li>
-
-              <li class="navigation-item">
-                <span class="rotate-holder"></span>
-                <span class="background-holder" style="background-image: url(<?php echo get_template_directory_uri(); ?>/assets/img/circle-slider/img-4.jpeg);"></span>
-              </li>
-
-              <li class="navigation-item">
-                <span class="rotate-holder"></span>
-                <span class="background-holder" style="background-image: url(<?php echo get_template_directory_uri(); ?>/assets/img/circle-slider/img-5.jpg);"></span>
-              </li>
-
-              <li class="navigation-item">
-                <span class="rotate-holder"></span>
-                <span class="background-holder" style="background-image: url(<?php echo get_template_directory_uri(); ?>/assets/img/circle-slider/img-6.jpg);"></span>
-              </li>
-
-              <li class="navigation-item">
-                <span class="rotate-holder"></span>
-                <span class="background-holder" style="background-image: url(<?php echo get_template_directory_uri(); ?>/assets/img/circle-slider/hong.jpg);"></span>
-              </li>
-
-              <li class="navigation-item">
-                <span class="rotate-holder"></span>
-                <span class="background-holder" style="background-image: url(<?php echo get_template_directory_uri(); ?>/assets/img/circle-slider/img-8.jpeg);"></span>
-              </li>
-
-              <li class="navigation-item">
-                <span class="rotate-holder"></span>
-                <span class="background-holder" style="background-image: url(<?php echo get_template_directory_uri(); ?>/assets/img/circle-slider/img-9.jpg);"></span>
-              </li>
-
-
-            </ul>
-
-            <div class="detail">
-
-              <div class="detail-item active">
-                <div class="headline">INDIA</div>
-                <div class="background" style="background-image: url(<?php echo get_template_directory_uri(); ?>/assets/img/circle-slider//img-1.jpeg); height: 100vh;"></div>
-                <div class="background" style="background-image: url(assets/img/img-1.jpeg); height: 100vh; background-size: cover; background-position: center;"></div>
-              </div>
-              <!-- slideshow:details END -->
-
-              <!-- slideshow:details START -->
-              <div class="detail-item">
-                <div class="headline">AMERICA</div>
-                <div class="background" style="background-image: url(<?php echo get_template_directory_uri(); ?>/assets/img/circle-slider/statue.jpg);"></div>
-              </div>
-              <!-- slideshow:details END -->
-
-              <!-- slideshow:details START -->
-              <div class="detail-item">
-                <div class="headline">LONDON</div>
-                <div class="background" style="background-image: url(<?php echo get_template_directory_uri(); ?>/assets/img/circle-slider/img-3.jpg);"></div>
-              </div>
-              <!-- slideshow:details END -->
-
-              <!-- slideshow:details START -->
-              <div class="detail-item">
-                <div class="headline">JAPAN</div>
-                <div class="background" style="background-image: url(<?php echo get_template_directory_uri(); ?>/assets/img/circle-slider/img-4.jpeg);"></div>
-              </div>
-              <!-- slideshow:details END -->
-
-              <!-- slideshow:details START -->
-              <div class="detail-item">
-                <div class="headline">PARIS</div>
-                <div class="background" style="background-image: url(<?php echo get_template_directory_uri(); ?>/assets/img/circle-slider/img-5.jpg);"></div>
-              </div>
-              <!-- slideshow:details END -->
-
-              <!-- slideshow:details START -->
-              <div class="detail-item">
-                <div class="headline">SINGAPORE</div>
-                <div class="background" style="background-image: url(<?php echo get_template_directory_uri(); ?>/assets/img/circle-slider/img-6.jpg);"></div>
-              </div>
-              <!-- slideshow:details END -->
-
-              <!-- slideshow:details START -->
-              <div class="detail-item">
-                <div class="headline">Sydney</div>
-                <div class="background" style="background-image: url(<?php echo get_template_directory_uri(); ?>/assets/img/circle-slider/hong.jpg);"></div>
-              </div>
-              <!-- slideshow:details END -->
-
-              <!-- slideshow:details START -->
-              <div class="detail-item">
-                <div class="headline">Istanbul</div>
-                <div class="background" style="background-image: url(<?php echo get_template_directory_uri(); ?>/assets/img/circle-slider/img-8.jpeg);"></div>
-              </div>
-              <!-- slideshow:details END -->
-
-              <!-- slideshow:details START -->
-              <div class="detail-item">
-                <div class="headline">Hong Kong</div>
-                <div class="background" style="background-image: url(<?php echo get_template_directory_uri(); ?>/assets/img/circle-slider/img-9.jpg);"></div>
-              </div>
-              <!-- slideshow:details END -->
+        <div class="col-12 col-md-12 ">
+          <div class="timeline">
+            <div class="swiper-container">
+              <div class="swiper-button-next"></div>
+              <div class="swiper-button-prev"></div>
+              <div class="swiper-pagination"></div>
+              <div class="swiper-wrapper"></div>
             </div>
-          </div>
-          <div class="col-12 col-md-4">
-
           </div>
         </div>
       </div>

@@ -3,6 +3,8 @@
 @import 'fluid-type';
 @import '~bootstrap/scss/bootstrap';
 
+@import '~swiper/swiper-bundle.css';
+
 h1,
 h2,
 h3,
@@ -100,165 +102,319 @@ body.home {
   }
 }
 
+// Timeline
+
 section.words-slider {
-  .slideshow {
-    position: relative;
-    display: block;
+  background: $blue;
+
+  .timeline {
     width: 100%;
-    height: 100%;
-    height: 100vh;
-    margin: 0 auto;
-    visibility: hidden;
-    overflow: hidden;
+    background-color: #fff;
+    position: relative;
+    // box-shadow: 0 5px 25px 5px rgba($black, 0.2);
 
-    ul.navigation {
-      position: absolute;
-      display: block;
-      width: 640px;
-      height: 640px;
-      padding: 0;
-      margin: 0;
-      left: -230px;
-      top: 50%;
-      margin-top: -320px;
-      z-index: 10;
+    h3,
+    h4 {
+      color: #fff;
+    }
 
-      li.navigation-item {
-        position: absolute;
-        display: inline-block;
-        overflow: hidden;
-        width: 120px;
-        height: 120px;
-        padding: 10px;
-        text-align: center;
-        cursor: pointer;
-        border-radius: 50%;
-        transition: border 0.6s ease-in-out;
+    h3 {
+      @include fluid-type(24px, 46px);
+      font-weight: bold;
+    }
 
-        .rotate-holder {
-          position: fixed;
-          display: block;
-          width: 0;
-          height: 0;
-          left: -9999px;
-          top: -9999px;
-        }
-        .background-holder {
-          position: absolute;
-          display: block;
-          width: 100%;
-          height: 100%;
-          top: 0;
-          right: 0;
-          bottom: 0;
-          left: 0;
-          border-radius: 50%;
-          background-repeat: no-repeat;
-          background-position: center center;
-          background-size: cover;
-          opacity: 1;
-          visibility: visible;
-          transition: opacity 0.6s ease-in-out, visibility 0.6s ease-in-out;
-        }
-      }
+    h4 {
+      @include fluid-type(18px, 24px);
+      margin-top: 20px;
+      margin-bottom: 10px;
+    }
 
-      li.navigation-item:hover .background-holder {
-        opacity: 0.75;
-      }
-      li.navigation-item.active .background-holder {
-        opacity: 0;
-        visibility: hidden;
+    .description {
+      p {
+        @include fluid-type(14px, 18px);
+        font-weight: 300;
       }
     }
 
-    .detail {
+    .words-list-wrapper:before {
+      content: '';
+      background: $blue;
+      position: absolute;
+      top: -100vh;
+      width: 100%;
+      height: 200vh;
+      z-index: -1;
+      margin-left: -30px;
+    }
+
+    .words-list {
+      li {
+        @include fluid-type(14px, 18px);
+        font-weight: 300;
+        font-size: 14px;
+        line-height: 2em;
+        list-style-type: none;
+        cursor: pointer;
+
+        &:before {
+          content: '—';
+          margin-right: 10px;
+        }
+      }
+    }
+
+    &:before {
+      content: '';
       position: absolute;
       display: block;
-      width: 100%;
-      height: 100%;
       top: 0;
       right: 0;
-      bottom: 0;
-      left: 0;
-      z-index: 8;
+      width: 100vw;
+      height: 100%;
+      background: linear-gradient(116.57deg, #0f4c81 4.61%, #357ec3 105.19%), #0f4c81;
+    }
 
-      .detail-item {
+    .swiper-container {
+      height: 600px;
+      width: 100%;
+      position: relative;
+
+      &.swiper-container-vertical > .swiper-pagination-bullets {
+        right: unset;
+      }
+    }
+
+    .swiper-wrapper {
+      transition: 0.3s cubic-bezier(0.68, -0.4, 0.27, 1.34) 0.2s;
+      z-index: 0;
+    }
+
+    .swiper-slide {
+      position: relative;
+      color: $white;
+      overflow: hidden;
+      background-size: cover;
+      background-repeat: no-repeat;
+      background-position: center center;
+
+      &-content {
         position: absolute;
+        text-align: center;
+        width: 80%;
+        max-width: 310px;
+        right: 50%;
+        top: 13%;
+        transform: translate(50%, 0);
+        font-size: 12px;
+        z-index: 2;
+      }
+
+      .timeline-year {
         display: block;
-        width: 100%;
-        height: 100%;
-        top: 0;
-        right: 0;
-        bottom: 0;
-        left: 0;
+        font-style: italic;
+        font-size: 42px;
+        margin-bottom: 50px;
+        transform: translate3d(20px, 0, 0);
+        color: $primary;
+        font-weight: 300;
         opacity: 0;
-        visibility: hidden;
-        transition: opacity 0.3s ease-in-out, visibility 0.3s ease-in-out;
+        transition: 0.2s ease 0.4s;
+      }
 
-        .headline {
-          position: absolute;
-          display: block;
-          width: 100%;
-          max-width: calc(100% - 480px);
-          height: 126px;
-          top: 50%;
-          left: 50%;
-          transform: translate(-50%, -50%);
-          overflow: visible;
-          white-space: nowrap;
-          box-sizing: border-box;
-          z-index: 2;
-        }
+      .timeline-title {
+        font-weight: 800;
+        font-size: 34px;
+        margin: 0 0 30px;
+        opacity: 0;
+        transform: translate3d(20px, 0, 0);
+        transition: 0.2s ease 0.5s;
+      }
 
-        .headline .letter {
-          font-family: 'Oswald', sans-serif;
-          position: relative;
-          display: inline-block;
-          opacity: 0;
-          visibility: hidden;
-          color: #ffffff;
-          font-size: 132px;
-          line-height: 110px;
-          font-weight: 900;
-          font-kerning: none;
-          white-space: nowrap;
-          box-sizing: border-box;
-          text-transform: uppercase;
-        }
+      .timeline-text {
+        line-height: 1.5;
+        opacity: 0;
+        transform: translate3d(20px, 0, 0);
+        transition: 0.2s ease 0.6s;
+      }
 
-        .background {
-          position: absolute;
-          display: block;
-          width: 100%;
-          width: calc(100% + 100px);
-          height: 100%;
-          height: calc(100% + 100px);
-          top: 0;
-          right: 0;
-          bottom: 0;
-          left: 0;
-          overflow: visible;
-          background-repeat: no-repeat;
-          background-position: center center;
-          background-size: cover;
-          z-index: 1;
-        }
-        .background::before {
-          content: '';
-          background: linear-gradient(to right, black 0%, rgba(0, 0, 0, 0) 90%);
-          position: absolute;
-          display: block;
-          width: 100%;
-          height: 100%;
-          top: 0;
-          right: 0;
-          bottom: 0;
-          left: 0;
-          z-index: 2;
-        }
-        &.active {
+      &-active {
+        .timeline-year {
           opacity: 1;
-          visibility: visible;
+          transform: translate3d(0, 0, 0);
+          transition: 0.4s ease 1.6s;
+        }
+
+        .timeline-title {
+          opacity: 1;
+          transform: translate3d(0, 0, 0);
+          transition: 0.4s ease 1.7s;
+        }
+
+        .timeline-text {
+          opacity: 1;
+          transform: translate3d(0, 0, 0);
+          transition: 0.4s ease 1.8s;
+        }
+      }
+    }
+
+    .swiper-pagination {
+      left: calc(15% - 30px) !important;
+      height: 100%;
+      display: none;
+      flex-direction: column;
+      justify-content: center;
+      font-style: italic;
+      font-weight: 300;
+      font-size: 18px;
+      z-index: 1;
+
+      &::before {
+        content: '';
+        position: absolute;
+        left: -30px;
+        top: 0;
+        height: 100%;
+        width: 1px;
+        background-color: rgba($white, 0.2);
+      }
+
+      &-bullet {
+        width: auto;
+        height: auto;
+        text-align: center;
+        opacity: 1;
+        background: transparent;
+        color: $primary;
+        margin: 15px 0 !important;
+        position: relative;
+        color: #fff;
+        outline: none;
+        position: relative;
+
+        &::before {
+          content: '';
+          position: absolute;
+          top: 16px;
+          left: -32.5px;
+          width: 6px;
+          height: 6px;
+          border-radius: 100%;
+          background-color: #fff;
+          transform: scale(0);
+          transition: 0.2s;
+        }
+
+        &-active {
+          color: #007fc7;
+          color: #fff;
+          font-size: 1.5em;
+          font-weight: bold;
+
+          &::before {
+            transform: scale(1);
+          }
+
+          &:after {
+            background: #0f0;
+            content: '';
+            position: absolute;
+            left: -10%;
+            top: -18px;
+            width: 120%;
+            padding-top: 120%;
+            z-index: -1;
+            border-radius: 50%;
+          }
+        }
+      }
+    }
+
+    .swiper-button-next,
+    .swiper-button-prev {
+      background-size: 20px 20px;
+      top: 15%;
+      width: 20px;
+      height: 20px;
+      margin-top: 0;
+      z-index: 2;
+      transition: 0.2s;
+
+      &:after {
+        color: #fff;
+      }
+    }
+
+    .swiper-button-prev {
+      right: 8%;
+      &:hover {
+        transform: translateX(-3px);
+      }
+    }
+
+    .swiper-button-next {
+      left: 8%;
+      &:hover {
+        transform: translateX(3px);
+      }
+    }
+
+    @media screen and (min-width: 768px) {
+      .swiper-slide {
+        &-content {
+          top: 50%;
+          transform: translateY(-50%);
+          font-size: 11px;
+          right: unset;
+          top: 50%;
+          width: 100%;
+          display: block;
+          text-align: left;
+          max-width: unset;
+        }
+
+        .timeline-year {
+          margin-bottom: 0;
+          font-size: 32px;
+        }
+
+        .timeline-title {
+          font-size: 46px;
+          margin: 0;
+        }
+      }
+
+      .swiper-pagination {
+        display: flex;
+      }
+
+      .swiper-button-prev {
+        top: 15%;
+        left: auto;
+        left: 15%;
+        transform: rotate(90deg) translate(0, 10px);
+
+        &:hover {
+          transform: rotate(90deg) translate(-3px, 10px);
+        }
+      }
+
+      .swiper-button-next {
+        top: auto;
+        bottom: 15%;
+        left: 15%;
+        transform: rotate(90deg) translate(0, 10px);
+
+        &:hover {
+          transform: rotate(90deg) translate(3px, 10px);
+        }
+      }
+    }
+
+    @media screen and (min-width: 1024px) {
+      .swiper-slide {
+        &-content {
+          left: 25%;
         }
       }
     }
