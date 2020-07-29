@@ -55,7 +55,7 @@ window.addEventListener('DOMContentLoaded', ()=>{
   // посты за год по id http://dataslov.ru/wp-json/wp/v2/word?word_year=7
 
 
-  const swiperWrapper = document.querySelector('section.words-slider .swiper-wrapper');
+  const circleContainer = document.querySelector('section.words-slider .circle-container');
 
   fetch('http://dataslov.ru/wp-json/wp/v2/word_year')
       .then((response) => {
@@ -70,25 +70,12 @@ window.addEventListener('DOMContentLoaded', ()=>{
 
         data.forEach((el) => {
           itemsNav += `
-            <div class="swiper-slide" data-year-id="${el.id}" data-year="${el.name}" >
-              <div class="swiper-slide-content">
-                <div class="container-fluid">
-                  <div class="row">
-                    <div class="col-12 col-md-6 description">
-
-                    </div>
-                    <div class="col-12 col-md-6 words-list-wrapper">
-                      <h4>Другие слова ${el.name} года:</h4>
-                      <ul class="words-list"></ul>
-                    </div>
-                  </div>
-                </div>
-
-              </div>
-            </div>
+            <li class="circle-slide" data-year-id="${el.id}" data-year="${el.name}" >
+              <span>${el.name}</span>
+            </li>
             `;
         });
-        swiperWrapper.insertAdjacentHTML('afterbegin', itemsNav);
+        circleContainer.insertAdjacentHTML('afterbegin', itemsNav);
         return data;
       })
       .then((data) => {
@@ -138,82 +125,72 @@ function getWordsList(yearId) {
 }
 
 function startSlider() {
-  const timelineSwiper = new Swiper('.words-slider .swiper-container', {
-    // Optional parameters
-    direction: 'vertical',
-    loop: false,
-    speed: 300,
+  const circleContainer = document.querySelector('.circle-container');
+  let lastRotate = 0;
 
-    // If we need pagination
-    pagination: {
-      el: '.swiper-pagination',
-      type: 'bullets',
-      clickable: true,
-      renderBullet: function(index, className) {
-        const year = document.querySelectorAll('.swiper-slide')[index].getAttribute('data-year');
-        return '<span class="' + className + '">' + year + '</span>';
-      },
-    },
+  circleContainer.querySelectorAll('li').forEach((el, i, arr)=>{
+    el.dataset.rotate = lastRotate;
+    el.style.transform = `rotate(${lastRotate}deg) translate(200px)`;
+    el.querySelector('span').style.transform = `rotate(0deg)`;
+    el.querySelector('span').dataset.rotate = 0;
 
-    // Navigation arrows
-    navigation: {
-      nextEl: '.swiper-button-next',
-      prevEl: '.swiper-button-prev',
-    },
+    lastRotate += 360 / arr.length;
 
-    // And if we need scrollbar
-    scrollbar: {
-      el: '.swiper-scrollbar',
-    },
-    initialSlide: document.querySelectorAll('.swiper-slide').length -1,
-    on: {
-      init: (swiper) => {
-        onSliderInit(swiper);
-      },
-    },
 
+    el.addEventListener('click', (e)=> {
+      circleContainer.dataset.rotate = -el.dataset.rotate;
+      circleContainer.style.transform = `rotate(-${el.dataset.rotate}deg)`;
+
+      onSliderInit(el);
+      // console.log(e.target.dataset.rotate);
+
+      circleContainer.querySelectorAll('li').forEach((el2, i, arr)=>{
+
+
+      });
+    });
   });
 
+  // like init
+  circleContainer.querySelectorAll(`li[data-year="${new Date().getFullYear()}"]`).click;
 
-  timelineSwiper.on('slideChange', function(swiper) {
-    onSliderInit(swiper);
-  });
 
-  function onSliderInit(swiper) {
-    const indexCurrentSlide = swiper.realIndex;
-    const currentSlide = swiper.slides[indexCurrentSlide];
-    const wordList = currentSlide.querySelector('.words-list');
+  function onSliderInit(yearEl) {
+    // console.log(yearEl);
+    const wordList = document.querySelector('.words-slider .words-list');
+    const currentSlide = document.querySelector('.words-slider .words-container');
     // console.log(currentSlide);
 
     // не пустой уже
-    if (!wordList.childNodes.length) {
-      getWordsList(currentSlide.dataset.yearId)
-          .then((data)=>{
-            console.log(data);
-            let items = '';
+    // if (!wordList.childNodes.length) {
+    getWordsList(yearEl.dataset.yearId)
+        .then((data)=>{
+          console.log(data);
+          let items = '';
 
-            data.forEach((el)=>{
-              items += `
+          data.forEach((el)=>{
+            items += `
               <li 
                 data-word='${el.title.rendered}'
                 data-link='${el.link}'
                 data-desc='${el.acf.kratkoe_opisanie}'
               >${el.title.rendered}</li>
             `;
-            });
+          });
 
-            wordList.insertAdjacentHTML('afterbegin', items);
-            changeWordInSlider(currentSlide, wordList.querySelector('li'));
-          })
-          .then(()=>{
-            wordList.querySelectorAll('li').forEach((el)=>{
-              el.addEventListener('click', (e)=>{
-                console.log(el);
-                changeWordInSlider(currentSlide, el);
-              });
+          // wordList.insertAdjacentHTML('afterbegin', items);
+          wordList.innerHTML = `<h4>Другие слова ${yearEl.dataset.year} года: </h4>` + items;
+          changeWordInSlider(currentSlide, wordList.querySelector('li'));
+        })
+        .then(()=>{
+          wordList.querySelectorAll('li').forEach((el)=>{
+            el.addEventListener('click', (e)=>{
+              console.log(el);
+              changeWordInSlider(currentSlide, el);
             });
           });
-    }
+        });
+    // }
   }
 }
 

@@ -2,6 +2,7 @@
 @import 'fonts';
 @import 'fluid-type';
 @import '~bootstrap/scss/bootstrap';
+//@import './../../fonts/font-awesome/css/all.min.css';
 
 @import '~swiper/swiper-bundle.css';
 
@@ -18,9 +19,32 @@ h6 {
 h1 {
   @include fluid-type(24px, 54px);
 }
+h2 {
+  @include fluid-type(22px, 38px);
+  padding: 60px 0 30px;
+}
 
 body {
   font-family: 'Roboto', sans-serif;
+}
+
+.btn {
+  user-select: none;
+  text-transform: uppercase;
+  font-family: Roboto;
+  font-weight: 900;
+  @include fluid-type(12px, 14px);
+  line-height: 150%;
+  letter-spacing: 0.235em;
+  text-transform: uppercase;
+  border-radius: 20px;
+  padding-left: 20px;
+  padding-right: 40px;
+
+  .btn-white {
+    background: #fff;
+    //    color: $dark-blue;
+  }
 }
 
 header {
@@ -104,6 +128,7 @@ body.home {
 
 // Timeline
 
+/*
 section.words-slider {
   background: $blue;
 
@@ -416,6 +441,203 @@ section.words-slider {
         &-content {
           left: 25%;
         }
+      }
+    }
+  }
+}
+
+*/
+
+// Timeline
+
+section.words-slider {
+  background: $blue;
+  overflow: hidden;
+
+  h3,
+  h4,
+  p,
+  li {
+    color: #fff;
+  }
+
+  h3 {
+    @include fluid-type(24px, 46px);
+    font-weight: bold;
+  }
+
+  h4 {
+    @include fluid-type(18px, 24px);
+    margin-top: 20px;
+    margin-bottom: 10px;
+  }
+  .description {
+    margin-top: 178px;
+    position: relative;
+    padding: 0 15px;
+
+    p {
+      @include fluid-type(14px, 18px);
+      font-weight: 300;
+    }
+  }
+
+  .circle-container {
+    width: 550px;
+    height: 550px;
+    border-radius: 50%;
+    transition: 0.2s all linear;
+    margin-left: -330px;
+    padding-left: 0;
+    z-index: 1;
+    position: relative;
+
+    li {
+      width: 90px;
+      height: 90px;
+      background: $green;
+      position: absolute;
+      border-radius: 50%;
+      left: 50%;
+      top: 50%;
+      margin-left: -45px;
+      margin-top: -45px;
+      display: flex;
+      list-style-type: none;
+      justify-content: center;
+      align-items: center;
+      transition: 0.2s all linear;
+
+      span {
+        position: relative;
+        display: flex;
+        color: #fff;
+        width: 90px;
+        height: 90px;
+        justify-content: center;
+        align-items: center;
+        user-select: none;
+        cursor: pointer;
+      }
+    }
+  }
+
+  .words-container {
+    position: relative;
+
+    &:before {
+      content: '';
+      position: absolute;
+      display: block;
+      top: 0;
+      right: 0;
+      width: 100vw;
+      height: 100%;
+      background: linear-gradient(116.57deg, #0f4c81 4.61%, #357ec3 105.19%), #0f4c81;
+      z-index: 0;
+    }
+  }
+
+  .words-list-wrapper:before {
+    content: '';
+    background: $blue;
+    position: absolute;
+    top: -100vh;
+    width: 100%;
+    height: 200vh;
+    z-index: -1;
+    margin-left: -30px;
+  }
+
+  .words-list {
+    margin-top: 200px;
+    margin-left: 50px;
+
+    li {
+      @include fluid-type(14px, 18px);
+      font-weight: 300;
+      font-size: 14px;
+      line-height: 2em;
+      list-style-type: none;
+      cursor: pointer;
+
+      &:before {
+        content: '—';
+        margin-right: 10px;
+      }
+    }
+  }
+}
+
+section.conception {
+  margin-top: 20px;
+  margin-bottom: 20px;
+
+  .container {
+    border-width: 1px;
+    border-style: solid;
+    border-image: linear-gradient(to bottom, #fff, $dark-blue) 1 100%;
+  }
+
+  .level {
+    margin-bottom: 50px;
+
+    &.level-2 {
+      ul {
+        margin-top: -1.5em;
+      }
+    }
+
+    &.level-3 {
+      ul {
+        margin-top: -3em;
+      }
+    }
+
+    &.level-4 {
+      ul {
+        margin-top: -4.5em;
+      }
+    }
+
+    img {
+      margin-top: 20px;
+      margin-left: -15px;
+    }
+
+    ul {
+      @include fluid-type(14px, 18px);
+      font-family: Lora;
+      font-weight: bold;
+
+      li {
+        color: #33333350;
+        list-style-type: none;
+        b {
+          color: $dark-blue;
+        }
+      }
+    }
+
+    .description {
+      position: relative;
+
+      &:before {
+        position: absolute;
+        content: '';
+        width: calc(100% + 100px);
+        height: 2px;
+        display: block;
+        background: $dark-blue;
+        right: -40px;
+        top: 0.5em;
+      }
+
+      p {
+        background: #fff;
+        position: relative;
+        padding-left: 15px;
+        padding-right: 10px;
       }
     }
   }
