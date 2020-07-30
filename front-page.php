@@ -13,7 +13,7 @@
         <div class="col-12 col-md-8">
           <div class="back">
             <div class="clock__wrapper">
-              <img class="hand" src="<?php echo get_template_directory_uri(); ?>/assets/img/clocks.svg" />
+              <img class="hand" src="<?php echo get_template_directory_uri(); ?>/assets/img/hand.png" />
               <style>
               /* for shadow */
               .clock {
@@ -268,14 +268,14 @@ foreach ($users as $user) {
 
   <!-- <section>
     <?php if (have_posts()): while (have_posts()): the_post();?>
-						    <?php the_content();?>
-						    <?php endwhile;endif;?>
+								    <?php the_content();?>
+								    <?php endwhile;endif;?>
   </section>
 
   <section>
     <?php if (have_posts()): while (have_posts()): the_post();?>
-						    <?php the_content();?>
-						    <?php endwhile;endif;?>
+								    <?php the_content();?>
+								    <?php endwhile;endif;?>
   </section> -->
 </main>
 

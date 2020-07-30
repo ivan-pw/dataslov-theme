@@ -29,15 +29,17 @@ window.addEventListener('DOMContentLoaded', ()=>{
         window.getComputedStyle(img, null).getPropertyValue('padding-top').replace(/\D/gi, '') -
         window.getComputedStyle(img, null).getPropertyValue('padding-bottom').replace(/\D/gi, '');
 
-      console.log(sizes);
-      console.log(height);
+      // console.log(sizes);
+      // console.log((height * 0.406015) + +window.getComputedStyle(img, null).getPropertyValue('padding-top').replace(/\D/gi, ''));
 
       clock.style.position = 'absolute';
-      clock.style.top = (height * 0.4517) +
-        +window.getComputedStyle(img, null).getPropertyValue('padding-top').replace(/\D/gi, '') +
-        'px';
-      clock.style.height = (height * 0.1815) + 'px';
-      clock.style.right = (sizes.width * 0.77) + 'px';
+      clock.style.top = (height * 0.401015) + +window.getComputedStyle(img, null).getPropertyValue('padding-top').replace(/\D/gi, '') + 'px';
+      // clock.style.top = (height * 0.4517) +
+      //   +window.getComputedStyle(img, null).getPropertyValue('padding-top').replace(/\D/gi, '') + 'px';
+      clock.style.height = (height * 0.197368) + 'px';
+      // console.log(((height * 0.197368) * 0.385542));
+      clock.style.left = ((height * 0.197368) * 0.300542) + +window.getComputedStyle(img, null).getPropertyValue('padding-left').replace(/\D/gi, '') + 'px';
+      console.log(clock.style.left);
       clock.style.width = clock.style.height;
     }
 
