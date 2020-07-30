@@ -130,7 +130,7 @@ function startSlider() {
 
   circleContainer.querySelectorAll('li').forEach((el, i, arr)=>{
     el.dataset.rotate = lastRotate;
-    el.style.transform = `rotate(${lastRotate}deg) translate(200px)`;
+    el.style.transform = `rotate(${lastRotate}deg) translate(${circleContainer.offsetHeight / 3}px)`; // 200
     el.querySelector('span').style.transform = `rotate(0deg)`;
     el.querySelector('span').dataset.rotate = 0;
 
@@ -152,7 +152,7 @@ function startSlider() {
   });
 
   // like init
-  circleContainer.querySelectorAll(`li[data-year="${new Date().getFullYear()}"]`).click;
+  circleContainer.querySelector(`li[data-year="${new Date().getFullYear()}"]`).click();
 
 
   function onSliderInit(yearEl) {

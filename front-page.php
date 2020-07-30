@@ -84,11 +84,11 @@
   <section class="words-slider">
     <div class="container">
       <div class="row">
-        <div class="col-12 col-md-2 ">
+        <div class="col-4 col-md-2 ">
           <ul class='circle-container'>
           </ul>
         </div>
-        <div class="col-12 col-md-6 words-container">
+        <div class="col-8 col-md-6 words-container">
           <div class="description"></div>
         </div>
         <div class="col-12 col-md-4 words-list-wrapper">
@@ -199,19 +199,84 @@
     </div>
   </section>
 
+  <section class="howto text-center">
+    <div class="container">
+      <div class="row">
+        <div class="col-12">
+          <h2 class="">Как стать участником проекта?</h2>
+        </div>
+      </div>
+      <div class="row big-arrow">
+        <div class="col-12 col-md-3 item">
+          <div class="num">I.</div>
+          <p><b>Зарегистрироваться</b><br /> на сайте</p>
+        </div>
+        <div class="col-12 col-md-3 item">
+          <div class="num">II.</div>
+          <p><b>Подождать одобрения</b> <br />своей учетной записи</p>
+        </div>
+        <div class="col-12 col-md-3 item">
+          <div class="num">III.</div>
+          <p><b>Предложить новое определение</b> <br />или внести изменение</p>
+        </div>
+        <div class="col-12 col-md-3 item">
+          <div class="num">IV.</div>
+          <p><b>Одобренное определение</b> <br />добавят на сайт ведущие проекта</p>
+        </div>
+  </section>
 
+  <section class="team">
+    <div class="container">
+      <div class="row text-center">
+        <div class="col-12">
+          <h2>Наша команда</h2>
+        </div>
+      </div>
+      <div class="row">
+
+        <?php
+$users = get_users([
+    'role'    => 'administrator',
+    'exclude' => array(1),
+]);
+
+foreach ($users as $user) {
+    $meta = get_user_meta($user->ID);
+    //var_dump($meta);
+
+    //rol_v_proekte
+    echo '
+      <div class="col-12 col-md-4">
+        <div class="user">
+          <img class="team__photo" src="' . wp_get_attachment_image_url(get_field('foto', 'user_' . $user->ID), array(300, 300)) . '" />
+          <h5 class="team__name">
+          ' . $meta["first_name"][0] . '
+          ' . $meta["otchestvo"][0] . ' <br />
+          ' . $meta["last_name"][0] . '
+          </h5>
+          <p>' . get_field('rol_v_proekte', 'user_' . $user->ID) . '</p>
+        </div>
+      </div>
+      ';
+}
+?>
+      </div>
+
+    </div>
+
+  </section>
+
+  <!-- <section>
+    <?php if (have_posts()): while (have_posts()): the_post();?>
+						    <?php the_content();?>
+						    <?php endwhile;endif;?>
+  </section>
 
   <section>
     <?php if (have_posts()): while (have_posts()): the_post();?>
-    <?php the_content();?>
-    <?php endwhile;endif;?>
-    </>
-
-    <section>
-      <?php if (have_posts()): while (have_posts()): the_post();?>
-      <?php the_content();?>
-      <?php endwhile;endif;?>
-    </section>
+						    <?php the_content();?>
+						    <?php endwhile;endif;?>
+  </section> -->
 </main>
 
 
