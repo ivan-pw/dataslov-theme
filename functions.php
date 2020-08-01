@@ -34,7 +34,7 @@ function register_post_types()
     ];
     $args = [
         'labels'        => $labels,
-        'public'        => false,
+        'public'        => true,
         'show_ui'       => true, // показывать интерфейс в админке
         'show_in_rest'  => true,
         'has_archive'   => false,
@@ -106,6 +106,42 @@ function add_custom_taxonomies()
         'update_count_callback' => '_update_post_term_count',
         'query_var'             => true,
         'rewrite'               => array('slug' => 'word_year'),
+        'show_in_quick_edit'    => true,
+    ));
+
+// Labels part for the GUI
+
+    $labels = array(
+        'name'                       => _x('Буква', 'taxonomy general name'),
+        'singular_name'              => _x('Буква', 'taxonomy singular name'),
+        'search_items'               => __('Найти Букву'),
+        'popular_items'              => __('Popular Topics'),
+        'all_items'                  => __('Все Буквы'),
+        'parent_item'                => null,
+        'parent_item_colon'          => null,
+        'edit_item'                  => __('Изменить Букву'),
+        'update_item'                => __('Обновить Букву'),
+        'add_new_item'               => __('Добавить новую Букву'),
+        'new_item_name'              => __('New Topic Name'),
+        'separate_items_with_commas' => __('Separate topics with commas'),
+        'add_or_remove_items'        => __('Add or remove topics'),
+        'choose_from_most_used'      => __('Choose from the most used topics'),
+        'menu_name'                  => __('Буквы'),
+    );
+
+// Now register the non-hierarchical taxonomy like tag
+
+    register_taxonomy('word_letter', 'word', array(
+        'hierarchical'          => false,
+        'labels'                => $labels,
+        'show_ui'               => true,
+        'show_in_menu'          => true,
+        'show_in_nav_menus'     => true,
+        'show_in_rest'          => true,
+        'show_admin_column'     => true,
+        'update_count_callback' => '_update_post_term_count',
+        'query_var'             => true,
+        'rewrite'               => array('slug' => 'word_letter'),
         'show_in_quick_edit'    => true,
     ));
 }

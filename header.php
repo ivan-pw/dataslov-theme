@@ -26,8 +26,8 @@
 
   <header class="header">
     <div class="container">
-      <nav class="navbar navbar-expand-lg navbar-dark row">
-        <a class="navbar-brand col-12 col-md-4" href="/"><img src="<?php echo get_template_directory_uri(); ?>/assets/img/logo--blue.svg" /></a>
+      <nav class="navbar navbar-expand-lg navbar-light row">
+        <a class="navbar-brand col-8 col-md-4" href="/"><img src="<?php echo get_template_directory_uri(); ?>/assets/img/logo--blue.svg" /></a>
         <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavDropdown" aria-controls="navbarNavDropdown" aria-expanded="false" aria-label="Toggle navigation">
           <span class="navbar-toggler-icon"></span>
         </button>

@@ -1,33 +1,30 @@
-<?php get_header(); ?>
+<?php get_header();?>
 
-<article class="article-page">
-  <?php if (have_posts()): while (have_posts()): the_post(); ?>
-  <section class="top">
-    <div class="container-fluid top-text"
-      style="background: url(<?=get_the_post_thumbnail_url($post, 'large');?>) no-repeat 50% 50% / cover;">
-      <div class="row">
+<main>
+  <article>
+    <div class="container">
+      <div class="row text-center">
         <div class="col-12">
-          <div class="container-custom">
+          <div class="">
+
             <h1>
-              <span><?=get_the_title();?></span>
+              <?=get_the_title();?>
             </h1>
           </div>
         </div>
       </div>
-    </div>
-  </section>
-  <section class="content">
-    <div class="container-custom">
-      <div class="row">
-        <div class="col-12">
-          <div class="">
-            <?php the_content(); ?>
+      <div class="container">
+        <div class="row">
+          <div class="col-12">
+            <div class="">
+              <?php if (have_posts()): while (have_posts()): the_post();?>
+              <?php the_content();?>
+              <?php endwhile;endif;?>
+            </div>
           </div>
         </div>
       </div>
-    </div>
-  </section>
-  <?php endwhile; endif; ?>
-</article>
+  </article>
+</main>
 
 <?php get_footer();
