@@ -14,7 +14,7 @@ module.exports = {
         exclude: '/node_modules/',
       },
       {
-        test: /\.css$/,
+        test: /\.(css)$/,
         use: [
           'style-loader',
           MiniCssExtractPlugin.loader,
@@ -56,7 +56,7 @@ module.exports = {
         ],
       },
       {
-        test: /\.(png|jpg)$/,
+        test: /\.(png|jpg|gif|svg)$/,
         loader: 'url-loader',
       },
     ],

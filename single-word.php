@@ -10,37 +10,92 @@
           </h1>
         </div>
       </div>
-      <div class="container">
 
-        <?php if (have_posts()): while (have_posts()): the_post();?>
+      <?php if (have_posts()): while (have_posts()): the_post();?>
 
-        <div class="authors row">
-          <div class="col-auto">
-            <i>Автор(ы): </i><?=get_field('avtory');?>
-          </div>
-          <div class="col-auto">
-            <i>Редактор(ы): </i><?=get_field('redaktory');?>
-          </div>
-          <div class="col-auto">
-            <i>Сбор материала: </i><?=get_field('sbor_materiala');?>
-          </div>
+      <div class="authors row">
+        <div class="col-auto">
+          <i>Автор(ы): </i><?=get_field('avtory');?>
         </div>
+        <div class="col-auto">
+          <i>Редактор(ы): </i><?=get_field('redaktory');?>
+        </div>
+        <div class="col-auto">
+          <i>Сбор материала: </i><?=get_field('sbor_materiala');?>
+        </div>
+      </div>
 
-        <?php
+      <div class="row">
+        <div class="col-12">
+          <?php
         $full = get_field('full_description');
         //var_dump($full);
+        foreach ($full as $key => $variant) {
+            ?>
+          <div class="word-variant">
+            <h3><?=$variant['variant_znacheniya'];?></h3>
 
+            <div class="word__list">
+              <?php
+
+            // var_dump($variant);
+            foreach ($variant["znachenie"] as $key => $value) {
+                ?>
+              <div class="word__list-item row">
+
+
+                <div class="col">
+                  <div class="word__list-name">
+                    <b><?=$key + 1?>. </b>
+                    <?=$value['znachenie'];?>
+                    <div class="word__list-caption"><?=$value['chast_rechi'];?></div>
+
+                  </div>
+
+
+                  <div class="example-list">
+                    <?php
+        foreach ($value['primery'] as $key => $example) {
+                    ?>
+                    <div class="example-list__name"><?=$example['primer_ispolzovaniya'];?></div>
+                    <div class="example-list__source"><?=$example['istochnik_primera'];?></div>
+                    <?
+                }
+                ?>
+                  </div>
+                </div>
+
+
+                <div class="image-list col-auto">
+                  <?
+                // var_dump($value);
+                foreach ($value['illyustraczii'] as $key => $imgId) {
+                    echo '<a data-lightbox="' . $value['znachenie'] . '" href="' . wp_get_attachment_image_url($imgId, "full") . '" class="image-list__link" >
+								              <img class="team__photo" src="' . wp_get_attachment_image_url($imgId, 'thumbnail') . '" /> </a>';
+                }
+                ?>
+                </div>
+
+
+
+              </div>
+              <?
+            }
+            ?>
+            </div>
+          </div>
+          <?
+        }
         ?>
 
-        <div class="row">
-          <div class="col-12">
-          </div>
         </div>
-
-
-        <?php the_content();?>
-        <?php endwhile;endif;?>
       </div>
+
+      <div class="word-content">
+        <?php the_content();?>
+      </div>
+      <?php endwhile;endif;?>
+    </div>
     </div>
 
     <div class="container">

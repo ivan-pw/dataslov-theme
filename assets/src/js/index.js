@@ -2,6 +2,7 @@
 window.$ = window.jQuery = require('jquery');
 import 'popper.js';
 import 'bootstrap';
+import lightbox from 'lightbox2';
 // import {startCircleSlider} from './circle-slider';
 // import {startCircleSlider} from './circle-slider-animejs';
 // import anime from 'animejs';
@@ -11,6 +12,14 @@ import {AnalogClock} from 'analog-clock';
 import Swiper from 'swiper/bundle';
 
 import '../scss/style.scss';
+
+const domain = window.location.protocol + '//' + window.location.hostname;
+
+$(function() {
+  lightbox.option({
+    'showImageNumberLabel': false,
+  });
+});
 
 
 window.addEventListener('DOMContentLoaded', ()=>{
@@ -26,7 +35,7 @@ window.addEventListener('DOMContentLoaded', ()=>{
   const circleContainer = document.querySelector('section.words-slider .circle-container');
 
   if (circleContainer) {
-    fetch('http://dataslov.ru/wp-json/wp/v2/word_year')
+    fetch(domain + '/wp-json/wp/v2/word_year')
         .then((response) => {
           return response.json();
         })
@@ -115,7 +124,7 @@ function filtersInit() {
   });
 
   function getWordsByTerms(letterId, yearId) {
-    let url = 'http://dataslov.ru/wp-json/wp/v2/word?';
+    let url = domain + '/wp-json/wp/v2/word?';
     url += (letterId > 0) ? `word_letter=${letterId}&`: '';
     url += (yearId > 0) ? `word_year=${yearId}`: '';
 
@@ -199,7 +208,7 @@ function clockStart() {
 }
 
 function getWordsList(yearId) {
-  return fetch('http://dataslov.ru/wp-json/wp/v2/word?word_year=' + yearId)
+  return fetch(domain + '/wp-json/wp/v2/word?word_year=' + yearId)
       .then((response) => {
         return response.json();
       })
