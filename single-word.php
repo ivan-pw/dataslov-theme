@@ -71,7 +71,7 @@
                 // var_dump($value);
                 foreach ($value['illyustraczii'] as $key => $imgId) {
                     echo '<a data-lightbox="' . $value['znachenie'] . '" href="' . wp_get_attachment_image_url($imgId, "full") . '" class="image-list__link" >
-								              <img class="team__photo" src="' . wp_get_attachment_image_url($imgId, 'thumbnail') . '" /> </a>';
+																																																												              <img class="team__photo" src="' . wp_get_attachment_image_url($imgId, 'thumbnail') . '" /> </a>';
                 }
                 ?>
                 </div>
@@ -106,6 +106,50 @@
       </div>
     </div>
   </article>
+
+  <section class="linked-articles">
+    <div class="container">
+
+      <?php
+$posts = get_posts(array(
+    'numberposts' => 9,
+    'post_type'   => 'article',
+    'meta_query'  => array(
+        array(
+            'key'     => 'svyazannye_slova',
+            'value'   => $post->ID,
+            'compare' => 'LIKE',
+        ),
+    ),
+));
+
+//var_dump($posts);
+
+if (count($posts) > 0) {
+    echo '
+      <h2>Статьи по теме</h2>
+      <div class="row">
+    ';
+
+    foreach ($posts as $key => $post) {
+        echo '
+        <div class="col-12 col-md-4">
+      <h4>' . $post->post_title . '</h4>
+      <p>' . preg_replace('/\s+?(\S+)?$/', '', mb_substr(get_field('annotacziya', $post), 0, 301)) . '...</p>
+      <a href="' . $post->guid . '" class="btn btn-blue">Подробнее</a>
+      </div>
+      ';
+    }
+    echo '
+      </div>
+    ';
+}
+
+?>
+
+    </div>
+  </section>
+
 </main>
 
 <?php get_footer();
