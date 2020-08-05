@@ -559,7 +559,7 @@ section.words-slider {
     width: 550px;
     height: 550px;
     border-radius: 50%;
-    transition: 0.2s all linear;
+    transition: all 0.2s cubic-bezier(0.48, 0.12, 0, 1.13);
     margin-left: -330px;
     padding-left: 0;
     z-index: 1;
@@ -1021,6 +1021,69 @@ body.word-template-default {
   }
 }
 
+.library-page {
+  .library-filter {
+    padding-bottom: 50px;
+
+    &__type {
+      &__items-wrapper {
+        display: flex;
+        justify-content: center;
+        margin-bottom: 30px;
+      }
+      &__item {
+        background: #ddeeff;
+        padding: 7px 16px;
+        border-radius: 2em;
+        font-family: Lora, serif;
+        @include fluid-type(16px, 18px);
+        line-height: 1.4em;
+        user-select: none;
+        cursor: pointer;
+        color: $dark-blue;
+        font-weight: 600;
+
+        &.active {
+          background: $dark-blue;
+          color: #fff;
+          padding-left: 12px;
+
+          &:before {
+            content: '\f057';
+            font-family: FontAwesome;
+            margin-right: 15px;
+          }
+        }
+      }
+
+      &__item + span {
+        margin-left: 15px;
+      }
+    }
+    &__items-wrapper {
+      display: flex;
+      justify-content: space-between;
+    }
+    &__item {
+      font-family: Lora, serif;
+      @include fluid-type(16px, 24px);
+      line-height: 1.4em;
+      padding: 3px 5px;
+      user-select: none;
+      cursor: pointer;
+
+      &.active {
+        color: $blue;
+        font-size: 1.9em;
+        line-height: 1em;
+      }
+    }
+    &__name {
+      margin-top: 8px;
+    }
+  }
+}
+
 article {
   &.word-page {
     .authors {
@@ -1132,6 +1195,51 @@ article {
       &:after {
         top: unset;
         bottom: 0;
+      }
+    }
+  }
+}
+
+.articles-list {
+  &__item {
+    margin-bottom: 70px;
+
+    i {
+      color: #bababa;
+      margin: 16px 0 12px;
+      display: inline-block;
+    }
+    .article-type {
+      color: #fff;
+      background: #c4c4c4;
+      display: inline-block;
+      padding: 12px 70px 12px 120px;
+      font-family: Lora;
+      text-transform: uppercase;
+      font-weight: 600;
+      margin-left: -120px;
+      margin-bottom: 20px;
+    }
+
+    .annotation {
+      background: #f1f1f1;
+      padding: 20px 40px;
+
+      h6 {
+        color: #333;
+        text-transform: uppercase;
+        font-weight: 600;
+        margin-bottom: 1em;
+      }
+    }
+
+    .linked-words {
+      i {
+        margin-top: 20px;
+      }
+
+      a {
+        color: #333;
       }
     }
   }

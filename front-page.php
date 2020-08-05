@@ -29,8 +29,18 @@
                 background: transparent;
               }
 
+              #minute {
+                top: 10%;
+                height: 40%;
+                width: 6%;
+              }
+
               #second {
                 background: #0e4c80;
+              }
+
+              .clock.simple:after {
+                background: #0f4c81;
               }
 
 
@@ -268,14 +278,14 @@ foreach ($users as $user) {
 
   <!-- <section>
     <?php if (have_posts()): while (have_posts()): the_post();?>
-										    <?php the_content();?>
-										    <?php endwhile;endif;?>
+																    <?php the_content();?>
+																    <?php endwhile;endif;?>
   </section>
 
   <section>
     <?php if (have_posts()): while (have_posts()): the_post();?>
-										    <?php the_content();?>
-										    <?php endwhile;endif;?>
+																    <?php the_content();?>
+																    <?php endwhile;endif;?>
   </section> -->
 </main>
 

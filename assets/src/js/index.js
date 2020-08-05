@@ -80,7 +80,175 @@ window.addEventListener('DOMContentLoaded', ()=>{
     filtersInit();
     document.querySelector(`article .filter .filter__year .filter__item[data-term-name="${new Date().getFullYear()}"]`).click();
   }
+
+  if (document.querySelector('article .library-filter')) {
+    libraryFiltersInit();
+    document.querySelector(`article .library-filter .library-filter__year .library-filter__item[data-term-name="${new Date().getFullYear()}"]`).click();
+  }
 });
+
+
+function libraryFiltersInit() {
+  const filter = document.querySelector('article .library-filter');
+  let typeId = [];
+  let yearId = 0;
+  const filterType = filter.querySelector('.library-filter__type');
+  const filterYear = filter.querySelector('.library-filter__year');
+
+  filterType.addEventListener('click', (e)=> {
+    if (e.target.classList.contains('active')) {
+      e.target.classList.remove('active');
+      typeId = typeId.filter((el)=> el !== e.target.dataset.termId);
+      getArticlesByTerms(typeId, yearId);
+    } else if (e.target.classList.contains('library-filter__type__item')) {
+      typeId.push(e.target.dataset.termId);
+      // console.log(typeId);
+      // filterType.querySelectorAll('.library-filter__type__item').forEach((el)=>{
+      //   el.classList.remove('active');
+      // });
+      e.target.classList.add('active');
+
+      getArticlesByTerms(typeId, yearId);
+    }
+  });
+  filterYear.addEventListener('click', (e)=> {
+    if (e.target.classList.contains('active')) {
+      e.target.classList.remove('active');
+      yearId = 0;
+      getArticlesByTerms(typeId, yearId);
+    } else if (e.target.classList.contains('library-filter__item')) {
+      yearId = e.target.dataset.termId;
+      // console.log(yearId);
+
+      filterYear.querySelectorAll('.library-filter__item').forEach((el)=>{
+        el.classList.remove('active');
+      });
+      e.target.classList.add('active');
+
+      getArticlesByTerms(typeId, yearId);
+    }
+  });
+
+  function getArticlesByTerms(letterId, yearId) {
+    let url = domain + '/wp-json/wp/v2/article?';
+    url += (typeId > 0) ? `article_type=${typeId}&`: '';
+    url += (yearId > 0) ? `word_year=${yearId}`: '';
+
+    console.log(url);
+
+    fetch(url)
+        .then((response) => {
+          return response.json();
+        })
+        .then((data) => {
+          console.log(data);
+
+          const wrapper = document.querySelector('.articles-list');
+          wrapper.innerHTML = '';
+
+
+          data.forEach((item)=>{
+            let caption = '';
+            if (item.acf.full_description) {
+              caption = item.acf.full_description['0'].znachenie['0'].chast_rechi;
+            }
+
+            let authors = '';
+            if (item.acf.avtory) {
+              authors = `<div class="authors"><i>Авторы:</i><br />${item.acf.avtory}</div>`;
+            }
+
+            let publish = '';
+            if (item.acf.nazvanie_izdaniya) {
+              publish = `<div class="publish"><i>Название издания:</i><br />${item.acf.nazvanie_izdaniya}</div>`;
+            }
+
+            let city = '';
+            if (item.acf.gorod) {
+              city = `<div class="city"><i>Город:</i><br />${item.acf.gorod}</div>`;
+            }
+
+            let year = '';
+            if (item.acf.god) {
+              year = `<div class="year"><i>Год:</i><br />${item.acf.god}</div>`;
+            }
+
+            let pages = '';
+            if (item.acf.straniczy) {
+              pages = `<div class="pages"><i>Страницы:</i><br />${item.acf.straniczy}</div>`;
+            }
+
+            let link = '';
+            if (item.acf.ssylka_na_publikacziyu) {
+              link = `<div class="link"><i>Ссылка на публикацию::</i><br /><a href="${item.acf.ssylka_na_publikacziyu}" target="_blank">${item.acf.ssylka_na_publikacziyu}</a></div>`;
+            }
+
+            let linkedWords = '';
+            if (item.acf.svyazannye_slova.length) {
+              linkedWords = `<div class="linked-words"><i>Связанные слова: </i><br />`;
+              item.acf.svyazannye_slova.forEach((w, i) => {
+                linkedWords += `${((i > 0) ? ', ': '')} <a href="${w.guid}">${w.post_title}</a>`;
+              });
+              linkedWords += `</div>`;
+            }
+
+            const articleType = document
+                .querySelector(`.library-filter__type__item[data-term-id="${item.article_type}"]`)
+                .dataset.termName;
+
+            wrapper.insertAdjacentHTML('beforeend', `
+            <div class="articles-list__item row">
+              <div class="col-12 col-md-7">
+                <div class="article-type">${articleType}</div>
+                ${authors}
+                <div class="articles__name">
+                  <i>Название:</i>
+                  <h4>«${item.title.rendered}»</h4>
+                </div>
+                <div class="row">
+                  <div class="col">
+                    ${city}
+                  </div>
+                  <div class="col">
+                    ${year}
+                  </div>
+                  <div class="col">
+                    ${pages}
+                  </div>
+                </div>
+                ${link}
+              </div>
+              <div class="col-12 col-md-5">
+                <div class="annotation">
+                  <h6>Аннотация</h6>
+                  ${item.acf.annotacziya}
+                </div>
+                ${linkedWords}
+              </div>
+            </div>
+            `);
+
+
+            // <div class="articles row">
+            //   <h3 class="articles__name text-uppercase col-auto">
+            //     ${item.title.rendered}
+            //   </h3>
+            //   <div class="articles__caption col">
+            //     ${caption}
+            //   </div>
+            //   <div class="articles__description col-12">
+            //     ${item.acf.kratkoe_opisanie}
+            //   </div>
+            //   <div class="col-12">
+            //     <a class="btn btn-blue" href="${item.link}">Подробнее</a>
+            //   </div>
+            // </div>
+          });
+
+          return data;
+        });
+  }
+}
 
 function filtersInit() {
   const filter = document.querySelector('article .filter');
@@ -182,19 +350,22 @@ function clockStart() {
   function loaded() {
     const sizes = img.getBoundingClientRect();
     const height = sizes.height -
-      window.getComputedStyle(img, null).getPropertyValue('padding-top').replace(/\D/gi, '') -
-      window.getComputedStyle(img, null).getPropertyValue('padding-bottom').replace(/\D/gi, '');
+      window.getComputedStyle(img, null).getPropertyValue('padding-top').split(/(\.|px)/gi)[0] -
+      window.getComputedStyle(img, null).getPropertyValue('padding-bottom').split(/(\.|px)/gi)[0];
 
     // console.log(sizes);
     // console.log((height * 0.406015) + +window.getComputedStyle(img, null).getPropertyValue('padding-top').replace(/\D/gi, ''));
 
     clock.style.position = 'absolute';
-    clock.style.top = (height * 0.401015) + +window.getComputedStyle(img, null).getPropertyValue('padding-top').replace(/\D/gi, '') + 'px';
+    clock.style.top = (height * 0.395015) + +window.getComputedStyle(img, null).getPropertyValue('padding-top').split(/(\.|px)/gi)[0] + 'px';
     // clock.style.top = (height * 0.4517) +
     //   +window.getComputedStyle(img, null).getPropertyValue('padding-top').replace(/\D/gi, '') + 'px';
     clock.style.height = (height * 0.197368) + 'px';
+    // console.log(height);
+    // console.log(height * 0.197368);
     // console.log(((height * 0.197368) * 0.385542));
-    clock.style.left = ((height * 0.197368) * 0.300542) + +window.getComputedStyle(img, null).getPropertyValue('padding-left').replace(/\D/gi, '') + 'px';
+    // console.log(window.getComputedStyle(img, null).getPropertyValue('padding-left'));
+    clock.style.left = ((height * 0.197368) * 0.292542) + +window.getComputedStyle(img, null).getPropertyValue('padding-left').split(/(\.|px)/gi)[0] + 'px';
     console.log(clock.style.left);
     clock.style.width = clock.style.height;
   }
