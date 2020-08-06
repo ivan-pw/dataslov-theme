@@ -71,7 +71,7 @@
                 // var_dump($value);
                 foreach ($value['illyustraczii'] as $key => $imgId) {
                     echo '<a data-lightbox="' . $value['znachenie'] . '" href="' . wp_get_attachment_image_url($imgId, "full") . '" class="image-list__link" >
-																																																												              <img class="team__photo" src="' . wp_get_attachment_image_url($imgId, 'thumbnail') . '" /> </a>';
+																																																																						              <img class="team__photo" src="' . wp_get_attachment_image_url($imgId, 'thumbnail') . '" /> </a>';
                 }
                 ?>
                 </div>
@@ -100,8 +100,14 @@
 
     <div class="container">
       <div class="row">
-        <div class="col-12 slovnik-list ">
-
+        <div class="col-12">
+          <div class="comments-wrapper">
+            <?
+if (comments_open()) {
+    comments_template();
+}
+?>
+          </div>
         </div>
       </div>
     </div>

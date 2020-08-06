@@ -39,7 +39,7 @@ function register_post_types()
         'show_in_rest'  => true,
         'has_archive'   => false,
         'menu_position' => 20, // порядок в меню
-        'supports'      => ['title', 'editor', 'author', 'thumbnail'],
+        'supports'      => ['title', 'editor', 'author', 'thumbnail', 'comments'],
     ];
     register_post_type('word', $args);
 
@@ -228,3 +228,118 @@ function filter_rest_work_query($args, $request)
 }
 // add the filter
 add_filter("rest_work_query", 'filter_rest_work_query', 10, 2);
+
+add_action('register_form', 'myplugin_register_form');
+function myplugin_register_form()
+{
+
+    $first_name = (!empty($_POST['first_name'])) ? trim($_POST['first_name']) : '';
+    $last_name  = (!empty($_POST['last_name'])) ? trim($_POST['last_name']) : '';
+
+    ?>
+<p>
+  <label for="first_name"><?php _e('Имя', 'mydomain')?><br />
+    <input type="text" name="first_name" id="first_name" class="input" value="<?php echo esc_attr(wp_unslash($first_name)); ?>" size="25" /></label>
+</p>
+
+<p>
+  <label for="last_name"><?php _e('Фамилия', 'mydomain')?><br />
+    <input type="text" name="last_name" id="last_name" class="input" value="<?php echo esc_attr(wp_unslash($last_name)); ?>" size="25" /></label>
+</p>
+
+<?php
+}
+
+//2. Add validation. In this case, we make sure first_name is required.
+add_filter('registration_errors', 'myplugin_registration_errors', 10, 3);
+function myplugin_registration_errors($errors, $sanitized_user_login, $user_email)
+{
+
+    if (empty($_POST['first_name']) || !empty($_POST['first_name']) && trim($_POST['first_name']) == '') {
+        $errors->add('first_name_error', __('<strong>ERROR</strong>: You must include a first name.', 'mydomain'));
+    }
+    // if ( empty( $_POST['last_name'] ) || ! empty( $_POST['last_name'] ) && trim( $_POST['first_name'] ) == '' ) {
+    //     $errors->add( 'last_name_error', __( '<strong>ERROR</strong>: You must include a first name.', 'mydomain' ) );
+    // }
+    if (empty($_POST['last_name']) || !empty($_POST['last_name']) && trim($_POST['last_name']) == '') {
+        $errors->add('last_name_error', __('<strong>ERROR</strong>: You must include a first name.', 'mydomain'));
+    }
+    return $errors;
+}
+
+//3. Finally, save our extra registration user meta.
+add_action('user_register', 'myplugin_user_register');
+function myplugin_user_register($user_id)
+{
+    if (!empty($_POST['first_name'])) {
+        update_user_meta($user_id, 'first_name', trim($_POST['first_name']));
+        update_user_meta($user_id, 'last_name', trim($_POST['last_name']));
+    }
+}
+
+function my_login_logo()
+{
+    ?>
+<style type="text/css">
+body {
+  background: #ffffff !important;
+}
+
+body #login h1 {
+  background-image: unset;
+  background: url('<?php echo get_template_directory_uri(); ?>/assets/img/logo--blue.svg') no-repeat 50% 50% / contain;
+  width: 100%;
+  padding-top: 100px;
+}
+
+body #login h1 a {
+  display: none;
+}
+
+body #login form {
+  margin-top: 20px;
+  margin-left: 0;
+  padding: 26px 24px 46px;
+  font-weight: 400;
+  overflow: hidden;
+  background: #007fc7;
+  color: #fff;
+  border: 1px solid #ccd0d4;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, .04);
+  border-radius: 5px;
+}
+
+
+body #login form .submit #wp-submit {
+  border: 2px solid #1f5e82 !important;
+  background: #fff !important;
+  color: #007fc7 !important;
+  text-transform: uppercase !important;
+  font-weight: 800 !important;
+</style>
+}
+<?php
+}
+add_action('login_enqueue_scripts', 'my_login_logo');
+
+add_filter('get_comment_author', 'comments_filter_uprise', 10, 1);
+
+function comments_filter_uprise($author = '')
+{
+    $comment = get_comment($comment_author_email);
+
+    if (!empty($comment->comment_author_email)) {
+        if (!empty($comment->comment_author_email)) {
+            $user   = get_user_by('email', $comment->comment_author_email);
+            $author = $user->first_name . ' ' . $user->last_name;
+        } else {
+            $user   = get_user_by('email', $comment->comment_author_email);
+            $author = $user->first_name;
+        }
+    } else {
+        $user   = get_userdata($comment->user_id);
+        $author = $user->first_name . ' ' . $user->last_name;
+        $author = $comment->comment_author;
+    }
+    return $author;
+}
