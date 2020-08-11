@@ -44,6 +44,7 @@ wp_nav_menu([
 
 </footer>
 
+<script src="<?php echo get_template_directory_uri(); ?>/assets/node_modules/share-buttons/dist/share-buttons.js?<?=time();?>"></script>
 <script src="<?php echo get_template_directory_uri(); ?>/assets/dist/main.js?<?=time();?>"></script>
 
 <?php wp_footer();?>

@@ -3,6 +3,16 @@
 <main>
   <article class="word-page">
     <div class="container">
+      <div class="row">
+        <div class="col-12 ">
+          <?php
+
+if (function_exists('yoast_breadcrumb')) {
+    yoast_breadcrumb('<p id="breadcrumbs">', '</p>');
+}
+?>
+        </div>
+      </div>
       <div class="row text-center">
         <div class="col-12">
           <h1>
@@ -23,7 +33,15 @@
         <div class="col-auto">
           <i>Сбор материала: </i><?=get_field('sbor_materiala');?>
         </div>
+
+        <div class="col-12 text-center">
+
+          <div class="share mt-5"><a class="btn btn-share" data-link="<?=get_post_permalink();?>" data-title="<?=get_the_title();?>" data-desc="<?=get_the_excerpt();?>">Поделиться </a><span></span>
+          </div>
+        </div>
       </div>
+
+
 
       <div class="row">
         <div class="col-12">
@@ -71,7 +89,7 @@
                 // var_dump($value);
                 foreach ($value['illyustraczii'] as $key => $imgId) {
                     echo '<a data-lightbox="' . $value['znachenie'] . '" href="' . wp_get_attachment_image_url($imgId, "full") . '" class="image-list__link" >
-																																																																						              <img class="team__photo" src="' . wp_get_attachment_image_url($imgId, 'thumbnail') . '" /> </a>';
+																																																																																		              <img class="team__photo" src="' . wp_get_attachment_image_url($imgId, 'thumbnail') . '" /> </a>';
                 }
                 ?>
                 </div>

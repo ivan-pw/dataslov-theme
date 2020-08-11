@@ -343,3 +343,26 @@ function comments_filter_uprise($author = '')
     }
     return $author;
 }
+
+add_filter('wpseo_breadcrumb_links', 'wpseo_breadcrumb_add_parent_link');
+function wpseo_breadcrumb_add_parent_link($links)
+{
+    if (sizeof($links) > 1) {
+        //var_dump($links);
+        $new_links = [];
+        switch (get_post_type($links[1]['id'])) {
+            case 'word':
+                array_push($new_links, $links[1]);
+                array_unshift($new_links, ['url' => 'https://dataslov.ru/slovnik/', 'text' => 'Словник', 'id' => 40]);
+                array_unshift($new_links, $links[0]);
+                return $new_links;
+                break;
+
+            default:
+                # code...
+                break;
+        }
+
+    }
+    return $links;
+}

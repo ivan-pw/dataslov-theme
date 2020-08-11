@@ -3,6 +3,16 @@
 <main>
   <article class="article-page">
     <div class="container">
+      <div class="row">
+        <div class="col-12 ">
+          <?php
+
+if (function_exists('yoast_breadcrumb')) {
+    yoast_breadcrumb('<p id="breadcrumbs">', '</p>');
+}
+?>
+        </div>
+      </div>
       <div class="row text-center">
         <div class="col-12">
           <h1>

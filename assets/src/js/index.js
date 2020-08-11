@@ -85,8 +85,50 @@ window.addEventListener('DOMContentLoaded', ()=>{
     libraryFiltersInit();
     document.querySelector(`article .library-filter .library-filter__year .library-filter__item[data-term-name="${new Date().getFullYear()}"]`).click();
   }
+
+  document.addEventListener('click', (e)=>{
+    if (e.target.classList.contains('btn-share')) {
+      shareButtonsInit(e.target);
+    }
+  });
 });
 
+function shareButtonsInit(el) {
+  const social = [
+    {id: 'vk', className: 'btn-vk', icon: 'fa fa-vk', name: 'VK'},
+    {id: 'fb', className: 'btn-facebook', icon: 'fa fa-facebook-square', name: 'Facebook'},
+    {id: 'tw', className: 'btn-twitter', icon: 'fa fa-twitter', name: 'Twitter'},
+    {id: 'tg', className: 'btn-telegram', icon: 'fa fa-telegram', name: 'Telegram'},
+    {id: 'wa', className: 'btn-whatsapp', icon: 'fa fa-whatsapp', name: 'WhatsApp'},
+    {id: 'ok', className: 'btn-ok', icon: 'fa fa-odnoklassniki', name: 'Odnoklassniki'},
+    // {id: 'mail', className: 'btn-mail', icon: 'fas fa-at', name: 'EMail'},
+    // {id: 'btn-print', className: 'print', icon: 'fas fa-print', name: 'Print'},
+    // {id: 'tu', className: 'btn-tumblr', icon: 'fab fa-tumblr', name: 'Tumblr'},
+    // {id: 'hn', className: 'btn-hn', icon: 'fab fa-hacker-news', name: 'Hacker News'},
+    // {id: 'xi', className: 'btn-xing', icon: 'fab fa-xing', name: 'Xing'},
+    // {id: 'pk', className: 'btn-pocket', icon: 'fab fa-get-pocket', name: 'Pocket'},
+    // {id: 're', className: 'btn-reddit', icon: 'fab fa-reddit', name: 'Reddit'},
+    // {id: 'ev', className: 'btn-evernote', icon: 'far fa-sticky-note', name: 'Evernote'},
+    // {id: 'in', className: 'btn-linkedin', icon: 'fab fa-linkedin', name: 'LinkedIn'},
+    // {id: 'pi', className: 'btn-pinterest', icon: 'fab fa-pinterest', name: 'Pinterest'},
+    // {id: 'sk', className: 'btn-skype', icon: 'fab fa-skype', name: 'Skype'},
+  ];
+
+  const link = el.dataset.link;
+  const title = el.dataset.title;
+  const desc = el.dataset.desc;
+  const shareBtnContainer = el.parentElement;
+  let markup = '';
+
+  for (let i = 0; i < social.length; i++) {
+    const s = social[i];
+    markup += '<a class="' + s.className + '" data-id="' + s.id + '">' +
+          '<i class="' + s.icon + '"></i></a>';
+  }
+  shareBtnContainer.innerHTML = `<div class='share-btn' data-url='${link}' data-title='${title}' data-desc='${desc}'>${markup}</div>`;
+
+  window.ShareButtons.update();
+}
 
 function libraryFiltersInit() {
   const filter = document.querySelector('article .library-filter');
@@ -196,17 +238,20 @@ function libraryFiltersInit() {
                 .querySelector(`.library-filter__type__item[data-term-id="${item.article_type}"]`)
                 .dataset.termName;
 
+            // console.log(item);
+
             wrapper.insertAdjacentHTML('beforeend', `
             <div class="articles-list__item row">
               <div class="col-12 col-md-7">
-                <div class="article-type">${articleType}</div>
+                <div class="article-type">${articleType}</div> 
+                <div class="share"><a class="btn btn-share" data-link="${item.link}"  data-title="${item.title.rendered}" data-desc="${item.acf.annotacziya}">Поделиться </a><span></span></div>
                 ${authors}
                 <div class="articles__name">
                   <i>Название:</i>
                   <h4>«${item.title.rendered}»</h4>
                 </div>
                 <div class="row">
-                  <div class="col">
+                  <div class="col"> 
                     ${city}
                   </div>
                   <div class="col">
@@ -323,6 +368,7 @@ function filtersInit() {
               <div class="word__caption col">
                 ${caption}
               </div>
+              <div class="share"><a class="btn btn-share" data-link="${item.link}"  data-title="${item.title.rendered}" data-desc="${item.acf.kratkoe_opisanie}">Поделиться </a><span></span></div>
               <div class="word__description col-12">
                 ${item.acf.kratkoe_opisanie}
               </div>

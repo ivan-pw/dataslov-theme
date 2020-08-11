@@ -30,6 +30,15 @@ body {
   font-family: 'Roboto', sans-serif;
 }
 
+#breadcrumbs {
+  padding-top: 2em;
+  color: #bababa;
+
+  a {
+    color: rgba($blue, 0.6);
+  }
+}
+
 .btn {
   user-select: none;
   text-transform: uppercase;
@@ -57,6 +66,100 @@ body {
   &.btn-blue {
     background: $dark-blue;
     color: #fff;
+  }
+
+  &.btn-share {
+    border-color: $green;
+    border: 2px solid $green;
+    color: $green !important;
+    line-height: 1em;
+    font-size: 0.9em;
+    opacity: 0.8;
+
+    &:hover,
+    &:focus {
+      opacity: 1;
+    }
+
+    &:after {
+      font-family: FontAwesome;
+      content: '\f1e0';
+      margin-left: 1em;
+    }
+  }
+}
+
+.share-btn {
+  display: inline-flex;
+  justify-content: start;
+
+  a {
+    font-size: 1.3em;
+    cursor: pointer;
+    margin-right: 5px;
+
+    i {
+      width: 1.3em;
+      margin: 0 5px;
+      color: #fff !important;
+      display: flex;
+      height: 1.7em;
+      align-items: center;
+      justify-content: center;
+      padding-right: unset !important;
+    }
+
+    &.btn {
+      &-vk {
+        background: #4680c2;
+      }
+
+      &-facebook {
+        background: #3b5998;
+      }
+
+      &-twitter {
+        background: #00acee;
+      }
+
+      &-telegram {
+        background: #0088cc;
+      }
+
+      &-whatsapp {
+        background: #4fce5d;
+      }
+
+      &-ok {
+        background: #ed812b;
+      }
+    }
+  }
+}
+
+a[href$='.xlsx'],
+a[href$='.xls'] {
+  &:before {
+    content: '\f1c3';
+    font-family: FontAwesome;
+    margin-right: 5px;
+  }
+}
+
+a[href$='.docx'],
+a[href$='.doc'] {
+  &:before {
+    content: '\f1c2';
+    font-family: FontAwesome;
+    margin-right: 5px;
+  }
+}
+
+a[href$='.pdf'] {
+  &:before {
+    content: '\f1c1';
+    font-family: FontAwesome;
+    margin-right: 5px;
   }
 }
 
@@ -1024,6 +1127,11 @@ body.word-template-default {
 }
 
 .library-page {
+  .share {
+    display: inline-block;
+    margin-left: 10px;
+  }
+
   .library-filter {
     padding-bottom: 50px;
 
@@ -1356,5 +1464,121 @@ section.linked-articles {
     p.logged-in-as a {
       color: #bababa;
     }
+  }
+}
+
+.map {
+  .onmap {
+    position: absolute;
+    z-index: 999;
+    padding: 30px 40px 30px 30px;
+    margin-top: 100px;
+    margin-left: 20vw;
+    color: #fff;
+    background: linear-gradient(128.83deg, #0f4c81 4.61%, #357ec3 105.19%), #0f4c81;
+    border-radius: 10px;
+
+    .onmap__box {
+      ul {
+        list-style-type: none;
+        padding-left: 0;
+        margin-bottom: 0;
+
+        li {
+          line-height: 1.5em;
+
+          & + li {
+            margin-top: 1em;
+          }
+
+          a {
+            color: #fff;
+          }
+
+          i {
+            width: 30px;
+            text-align: center;
+            margin-right: 5px;
+          }
+        }
+      }
+    }
+  }
+}
+
+form.wpcf7-form {
+  input,
+  textarea {
+    border: 2px solid #e2e2e2;
+    width: 100%;
+    padding: 15px 20px;
+    border-radius: 10px;
+  }
+
+  input {
+    /* padding: 10px; */
+    margin-bottom: 1.5em;
+
+    & + .wpcf7-not-valid-tip {
+      font-size: 0.8em;
+      margin-top: -1.5em;
+    }
+  }
+
+  textarea {
+    height: 8.8em;
+  }
+
+  .top-text {
+    font-size: 1.2em;
+    color: #0f4c81;
+  }
+
+  .sub-text {
+    color: #bababa;
+    font-size: 0.8em;
+    margin-top: 3px;
+  }
+
+  .wpcf7-not-valid {
+    border-color: #f00;
+  }
+
+  .wpcf7-not-valid-tip {
+    font-size: 0.8em;
+  }
+}
+
+hr.wp-block-separator {
+  position: relative;
+  border-top: unset;
+  padding: 10px 0;
+  margin-bottom: 50px;
+
+  &:after {
+    position: absolute;
+    width: 100vw;
+    height: 1px;
+    right: 0;
+    bottom: 0;
+    display: block;
+    content: '';
+    background: linear-gradient(225deg, #fff, #0f4c81 26.56%), #0f4c81;
+  }
+}
+
+blockquote.wp-block-quote {
+  padding: 20px;
+  margin-left: 10%;
+  border-left: 2px solid #f1f1f1;
+
+  p {
+    color: $blue;
+    font-style: italic;
+    font-size: 1.2em;
+  }
+
+  cite {
+    color: #bababa;
   }
 }
