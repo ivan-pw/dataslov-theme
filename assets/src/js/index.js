@@ -367,8 +367,11 @@ function filtersInit() {
               </h3>
               <div class="word__caption col">
                 ${caption}
-              </div>
+              </div> 
+              
               <div class="share"><a class="btn btn-share" data-link="${item.link}"  data-title="${item.title.rendered}" data-desc="${item.acf.kratkoe_opisanie}">Поделиться </a><span></span></div>
+              <a class="btn btn-comments ml-md-3" href="${item.link}#comments">Предложить изменения</a>
+
               <div class="word__description col-12">
                 ${item.acf.kratkoe_opisanie}
               </div>

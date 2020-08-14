@@ -34,10 +34,12 @@ if (function_exists('yoast_breadcrumb')) {
           <i>Сбор материала: </i><?=get_field('sbor_materiala');?>
         </div>
 
-        <div class="col-12 text-center">
+        <div class="col-12 text-center d-md-flex justify-content-center">
 
-          <div class="share mt-5"><a class="btn btn-share" data-link="<?=get_post_permalink();?>" data-title="<?=get_the_title();?>" data-desc="<?=get_the_excerpt();?>">Поделиться </a><span></span>
+          <div class="share mt-5 mt-md-3"><a class="btn btn-share" data-link="<?=get_post_permalink();?>" data-title="<?=get_the_title();?>" data-desc="<?=get_the_excerpt();?>">Поделиться
+            </a><span></span>
           </div>
+          <a class="btn btn-comments ml-md-3 mt-3 mt-md-3" href="<?=get_post_permalink();?>#comments">Предложить изменения</a>
         </div>
       </div>
 
@@ -89,7 +91,7 @@ if (function_exists('yoast_breadcrumb')) {
                 // var_dump($value);
                 foreach ($value['illyustraczii'] as $key => $imgId) {
                     echo '<a data-lightbox="' . $value['znachenie'] . '" href="' . wp_get_attachment_image_url($imgId, "full") . '" class="image-list__link" >
-																																																																																		              <img class="team__photo" src="' . wp_get_attachment_image_url($imgId, 'thumbnail') . '" /> </a>';
+																																																																																																														              <img class="team__photo" src="' . wp_get_attachment_image_url($imgId, 'thumbnail') . '" /> </a>';
                 }
                 ?>
                 </div>
@@ -120,6 +122,7 @@ if (function_exists('yoast_breadcrumb')) {
       <div class="row">
         <div class="col-12">
           <div class="comments-wrapper">
+            <a name="comments"></a>
             <?
 if (comments_open()) {
     comments_template();
@@ -157,7 +160,7 @@ if (count($posts) > 0) {
 
     foreach ($posts as $key => $post) {
         echo '
-        <div class="col-12 col-md-4">
+        <div class="col-12 col-md-4 mb-5">
       <h4>' . $post->post_title . '</h4>
       <p>' . preg_replace('/\s+?(\S+)?$/', '', mb_substr(get_field('annotacziya', $post), 0, 301)) . '...</p>
       <a href="' . $post->guid . '" class="btn btn-blue">Подробнее</a>
