@@ -39,6 +39,12 @@ if (function_exists('yoast_breadcrumb')) {
               <?php }?>
               <div class="row">
 
+                <?if (strlen(get_field('nazvanie_izdaniya')) > 2) {?>
+                <div class="col-12">
+                  <div class="publish"><i>Название издания:</i><br><?=get_field('nazvanie_izdaniya')?></div>
+                </div>
+                <?php }?>
+
                 <?if (strlen(get_field('gorod')) > 2) {?>
                 <div class="col">
                   <div class="city"><i>Город:</i><br><?=get_field('gorod')?></div>
@@ -47,7 +53,7 @@ if (function_exists('yoast_breadcrumb')) {
 
                 <?if (strlen(get_field('god')) > 2) {?>
                 <div class="col">
-                  <div class="year"><i>god:</i><br><?=get_field('god')?></div>
+                  <div class="year"><i>Год:</i><br><?=get_field('god')?></div>
                 </div>
                 <?php }?>
 
@@ -57,8 +63,7 @@ if (function_exists('yoast_breadcrumb')) {
                 </div>
                 <?php }?>
               </div>
-              <div class="link"><i>Ссылка на публикацию::</i><br><a href="<?=get_field('ssylka_na_publikacziyu')?>" target=" _blank"><?=get_field('ssylka_na_publikacziyu')?></a></div>
-
+              <div class="link"><i>Ссылка на публикацию: </i><br><a href="<?=get_field('ssylka_na_publikacziyu')?>" target=" _blank"><?=get_field('ssylka_na_publikacziyu')?></a></div>
               <div class="linked-words"><i>Связанные слова: </i><br>
                 <?
         foreach (get_field('svyazannye_slova') as $key => $word) {

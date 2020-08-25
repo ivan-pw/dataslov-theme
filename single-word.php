@@ -24,15 +24,37 @@ if (function_exists('yoast_breadcrumb')) {
       <?php if (have_posts()): while (have_posts()): the_post();?>
 
       <div class="authors row">
+        <?php
+        if (get_field('avtory')) {
+            ?>
         <div class="col-auto">
           <i>Автор(ы): </i><?=get_field('avtory');?>
         </div>
+        <?php
+        }
+        ?>
+
+        <?php
+        if (get_field('redaktory')) {
+            ?>
         <div class="col-auto">
           <i>Редактор(ы): </i><?=get_field('redaktory');?>
         </div>
+        <?php
+        }
+        ?>
+
+
+        <?php
+        if (get_field('sbor_materiala')) {
+            ?>
         <div class="col-auto">
           <i>Сбор материала: </i><?=get_field('sbor_materiala');?>
         </div>
+        <?php
+        }
+        ?>
+
 
         <div class="col-12 text-center d-md-flex justify-content-center">
 
@@ -77,7 +99,14 @@ if (function_exists('yoast_breadcrumb')) {
                     <?php
         foreach ($value['primery'] as $key => $example) {
                     ?>
-                    <div class="example-list__name"><?=$example['primer_ispolzovaniya'];?></div>
+                    <div class="example-list__name"><?php
+        if (strpos($example['primer_ispolzovaniya'], ':::') === false) {
+                        echo '<i>' . $example['primer_ispolzovaniya'] . '</i>';
+                    } else {
+                        $str = explode(':::', $example['primer_ispolzovaniya']);
+                        echo $str[0] . ': <i>' . $str[1] . '</i>';
+                    }
+                    ?></div>
                     <div class="example-list__source"><?=$example['istochnik_primera'];?></div>
                     <?
                 }
@@ -91,7 +120,7 @@ if (function_exists('yoast_breadcrumb')) {
                 // var_dump($value);
                 foreach ($value['illyustraczii'] as $key => $imgId) {
                     echo '<a data-lightbox="' . $value['znachenie'] . '" href="' . wp_get_attachment_image_url($imgId, "full") . '" class="image-list__link" >
-																																																																																																														              <img class="team__photo" src="' . wp_get_attachment_image_url($imgId, 'thumbnail') . '" /> </a>';
+																																																																																																																																																																              <img class="team__photo" src="' . wp_get_attachment_image_url($imgId, 'thumbnail') . '" /> </a>';
                 }
                 ?>
                 </div>

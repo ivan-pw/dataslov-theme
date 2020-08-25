@@ -143,6 +143,7 @@ function add_custom_taxonomies()
         'query_var'             => true,
         'rewrite'               => array('slug' => 'word_letter'),
         'show_in_quick_edit'    => true,
+        'meta_box_cb'           => 'post_categories_meta_box',
     ));
 
 // Labels part for the GUI

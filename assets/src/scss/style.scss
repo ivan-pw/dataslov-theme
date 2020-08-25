@@ -1096,6 +1096,10 @@ body.word-template-default {
     padding: 40px 0 30px;
   }
 
+  .page-content h3 {
+    margin: 2em 0 1em;
+  }
+
   footer {
     margin-top: 40px;
   }
@@ -1347,9 +1351,13 @@ article {
         margin-bottom: 0em;
 
         &__name {
-          color: $dark-blue;
-          font-style: italic;
           margin-bottom: 0.5em;
+
+          i {
+            color: $dark-blue;
+            font-style: italic;
+            font-weight: 500;
+          }
         }
 
         &__source {

@@ -222,7 +222,7 @@ function libraryFiltersInit() {
 
             let link = '';
             if (item.acf.ssylka_na_publikacziyu) {
-              link = `<div class="link"><i>Ссылка на публикацию::</i><br /><a href="${item.acf.ssylka_na_publikacziyu}" target="_blank">${item.acf.ssylka_na_publikacziyu}</a></div>`;
+              link = `<div class="link"><i>Ссылка на публикацию:</i><br /><a href="${item.acf.ssylka_na_publikacziyu}" target="_blank">${item.acf.ssylka_na_publikacziyu}</a></div>`;
             }
 
             let linkedWords = '';
@@ -251,6 +251,9 @@ function libraryFiltersInit() {
                   <h4>«${item.title.rendered}»</h4>
                 </div>
                 <div class="row">
+                  <div class="col-12"> 
+                    ${publish}
+                  </div>
                   <div class="col"> 
                     ${city}
                   </div>
