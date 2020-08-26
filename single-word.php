@@ -72,6 +72,8 @@ if (function_exists('yoast_breadcrumb')) {
           <?php
         $full = get_field('full_description');
         //var_dump($full);
+
+        $keyVar = 0;
         foreach ($full as $key => $variant) {
             ?>
           <div class="word-variant">
@@ -81,14 +83,16 @@ if (function_exists('yoast_breadcrumb')) {
               <?php
 
             // var_dump($variant);
+
             foreach ($variant["znachenie"] as $key => $value) {
+                $keyVar++;
                 ?>
               <div class="word__list-item row">
 
 
                 <div class="col">
                   <div class="word__list-name">
-                    <b><?=$key + 1?>. </b>
+                    <b><?=$keyVar?>. </b>
                     <?=$value['znachenie'];?>
                     <div class="word__list-caption"><?=$value['chast_rechi'];?></div>
 
@@ -120,7 +124,7 @@ if (function_exists('yoast_breadcrumb')) {
                 // var_dump($value);
                 foreach ($value['illyustraczii'] as $key => $imgId) {
                     echo '<a data-lightbox="' . $value['znachenie'] . '" href="' . wp_get_attachment_image_url($imgId, "full") . '" class="image-list__link" >
-																																																																																																																																																																              <img class="team__photo" src="' . wp_get_attachment_image_url($imgId, 'thumbnail') . '" /> </a>';
+																																																																																																																																																																						              <img class="team__photo" src="' . wp_get_attachment_image_url($imgId, 'thumbnail') . '" /> </a>';
                 }
                 ?>
                 </div>

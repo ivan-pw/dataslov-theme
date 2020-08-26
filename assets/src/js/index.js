@@ -130,6 +130,10 @@ function shareButtonsInit(el) {
   window.ShareButtons.update();
 }
 
+function addSpinner(containerSelector) {
+  document.querySelector(containerSelector).innerHTML = '<div class="lds-ellipsis"><div></div><div></div><div></div><div></div></div>';
+}
+
 function libraryFiltersInit() {
   const filter = document.querySelector('article .library-filter');
   let typeId = [];
@@ -138,6 +142,7 @@ function libraryFiltersInit() {
   const filterYear = filter.querySelector('.library-filter__year');
 
   filterType.addEventListener('click', (e)=> {
+    addSpinner('.articles-list');
     if (e.target.classList.contains('active')) {
       e.target.classList.remove('active');
       typeId = typeId.filter((el)=> el !== e.target.dataset.termId);
@@ -154,6 +159,7 @@ function libraryFiltersInit() {
     }
   });
   filterYear.addEventListener('click', (e)=> {
+    addSpinner('.articles-list');
     if (e.target.classList.contains('active')) {
       e.target.classList.remove('active');
       yearId = 0;
@@ -306,6 +312,7 @@ function filtersInit() {
   const filterYear = filter.querySelector('.filter__year');
 
   filterLetter.addEventListener('click', (e)=> {
+    addSpinner('.slovnik-list');
     if (e.target.classList.contains('active')) {
       e.target.classList.remove('active');
       letterId = 0;
@@ -322,6 +329,7 @@ function filtersInit() {
     }
   });
   filterYear.addEventListener('click', (e)=> {
+    addSpinner('.slovnik-list');
     if (e.target.classList.contains('active')) {
       e.target.classList.remove('active');
       yearId = 0;
@@ -526,10 +534,11 @@ function startSlider() {
 }
 
 function changeWordInSlider(slide, wordEl) {
+  slide.querySelector('.description').innerHTML = ``;
   console.log(wordEl.dataset);
   slide.querySelector('.description')
       .innerHTML = `
-        <h3>«${wordEl.dataset.word}»</h3>
+        <h3>${wordEl.dataset.word}</h3>
         <p>${wordEl.dataset.desc}</p>
         <a href="${wordEl.dataset.link}" class="btn btn-white">Подробнее</a>
       `;
