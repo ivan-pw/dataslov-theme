@@ -47,11 +47,13 @@ window.addEventListener('DOMContentLoaded', ()=>{
           let itemsNav = '';
 
           data.forEach((el) => {
-            itemsNav += `
-            <li class="circle-slide" data-year-id="${el.id}" data-year="${el.name}" >
-              <span>${el.name}</span>
-            </li>
-            `;
+            if(+el.count > 0) { 
+              itemsNav += `
+              <li class="circle-slide" data-year-id="${el.id}" data-year="${el.name}" >
+                <span>${el.name}</span>
+              </li>
+              `;
+            }
           });
           circleContainer.insertAdjacentHTML('afterbegin', itemsNav);
           return data;

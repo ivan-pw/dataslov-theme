@@ -5,9 +5,9 @@
         <a class="logo" href="/"><img src="<?php echo get_template_directory_uri(); ?>/assets/img/logo-white.svg" /></a>
         <div class="contacts">
           <ul>
-            <li><i class="fa fa-envelope" aria-hidden="true"></i> <span>info@dataslov.ru</span></li>
-            <li><i class="fa fa-phone" aria-hidden="true"></i><span>+7 (812) 000 0000</span></li>
-            <li><i class="fa fa-map-marker" aria-hidden="true"></i><span>г. Санкт-Петербург, <br />Набережная Фонтанки 14</span></li>
+            <li><a href="mailto:info@dataslov.ru"><i class="fa fa-envelope" aria-hidden="true"></i> <span> info@dataslov.ru</span></a></li>
+            <li><a href="tel:8(812)363-61-11"><i class="fa fa-phone" aria-hidden="true"></i><span> 8(812)363-61-11, доб. 3429</span></a></li>
+            <li><i class="fa fa-map-marker" aria-hidden="true"></i><span>Санкт-Петербург, <br />1-я линия В.О., <br />д. 26, к. 703</span></li>
           </ul>
         </div>
       </div>
