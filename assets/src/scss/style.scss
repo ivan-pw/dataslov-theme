@@ -905,6 +905,10 @@ section.howto {
     padding-bottom: 60px;
   }
 
+  .btn {
+    margin: 0 auto;
+  }
+
   .big-arrow {
     div.item {
       position: relative;
@@ -1239,7 +1243,7 @@ body.word-template-default {
 
     &__items-wrapper {
       display: flex;
-      justify-content: space-between;
+      justify-content: space-around;
 
       @include media-breakpoint-down(sm) {
         flex-wrap: wrap;

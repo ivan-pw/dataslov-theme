@@ -30,7 +30,7 @@ if (function_exists('yoast_breadcrumb')) {
         <div class="row onmap">
           <div class="onmap__box">
             <ul>
-              <li><a href="tel:88120000000"><i class="fa fa-phone" aria-hidden="true"></i> 8(812)363-61-11, доб. 3429</a></li>
+              <li><a href="tel:8(812)363-61-11"><i class="fa fa-phone" aria-hidden="true"></i> 8(812)363-61-11, доб. 3429</a></li>
               <li><a href="mailto:info@dataslov.ru"><i class="fa fa-envelope" aria-hidden="true"></i> info@dataslov.ru</a></li>
               <li><i class="fa fa-map-marker" aria-hidden="true"></i> Санкт-Петербург, 1-я линия В.О., д. 26, к. 703</li>
             </ul>

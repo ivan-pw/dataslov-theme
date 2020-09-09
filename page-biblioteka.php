@@ -49,11 +49,14 @@ foreach ($terms as $key => $term) {
         <div class="col library-filter__items-wrapper">
           <?
 $terms = get_terms('word_year', array(
-    'hide_empty' => false,
+    'hide_empty' => true,
 ));
 
 foreach ($terms as $key => $term) {
-    echo '<span class="library-filter__item" data-term-id="' . $term->term_id . '" data-term-name="' . $term->name . '">' . $term->name . '</span>';
+    if (intval($term->name) > 2018) {
+        echo '<span class="library-filter__item" data-term-id="' . $term->term_id . '" data-term-name="' . $term->name . '">' . $term->name . '</span>';
+    }
+
 }
 ?>
         </div>
