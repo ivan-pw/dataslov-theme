@@ -1074,12 +1074,10 @@ footer {
   }
 
   .menu {
-    ul {
-      li {
-        list-style-type: none;
-        margin-bottom: 1em;
-        @include fluid-type(16px, 20px);
-      }
+    li {
+      list-style-type: none;
+      margin-bottom: 1em;
+      @include fluid-type(16px, 20px);
     }
   }
 

@@ -269,7 +269,7 @@
             <div class="row">
 
                 <?php
-$users = get_users([
+                $users = get_users([
                     'role' => 'administrator',
                     'exclude' => [1],
                 ]);
