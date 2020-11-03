@@ -366,6 +366,8 @@ function filtersInit() {
       })
       .then((data) => {
         console.log(data);
+        sortDataAsc(data);
+        console.log(data);
 
         const wrapper = document.querySelector('.slovnik-list');
         wrapper.innerHTML = '';
@@ -384,7 +386,7 @@ function filtersInit() {
                 ${item.title.rendered}
               </h3>
               <div class="word__caption col">
-                <!--${caption}-->
+                ${caption}
               </div> 
               
               <div class="share"><a class="btn btn-share" data-link="${item.link}"  data-title="${item.title.rendered}" data-desc="${item.acf.kratkoe_opisanie}">Поделиться </a><span></span></div>
@@ -471,6 +473,11 @@ function getWordsList(yearId) {
     })
     .then((data) => {
       // console.log(data);
+
+      console.log(data);
+      sortDataAsc(data);
+      console.log(data);
+
       return data;
       /*
         let items = '';
@@ -528,19 +535,6 @@ function startSlider() {
         console.log(data);
         let items = '';
 
-        data.sort((a, b) => {
-          console.log(a.title.rendered);
-          console.log(b.title.rendered);
-
-          if (a.title.rendered.toLowerCase() > b.title.rendered.toLowerCase()) {
-            return 1;
-          }
-          if (a.title.rendered.toLowerCase() < b.title.rendered.toLowerCase()) {
-            return -1;
-          }
-          return 0;
-        });
-
         data.forEach((el) => {
           items += `
               <li 
@@ -575,4 +569,21 @@ function changeWordInSlider(slide, wordEl) {
         <p>${wordEl.dataset.desc}</p>
         <a href="${wordEl.dataset.link}" class="btn btn-white">Подробнее</a>
       `;
+}
+
+function sortDataAsc(data) {
+  data.sort((a, b) => {
+    // console.log(a.title.rendered);
+    // console.log(b.title.rendered);
+
+    if (a.title.rendered.toLowerCase() > b.title.rendered.toLowerCase()) {
+      return 1;
+    }
+    if (a.title.rendered.toLowerCase() < b.title.rendered.toLowerCase()) {
+      return -1;
+    }
+    return 0;
+  });
+
+  return data;
 }
