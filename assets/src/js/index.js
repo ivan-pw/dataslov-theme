@@ -317,6 +317,9 @@ function filtersInit() {
   const filterLetter = filter.querySelector('.filter__letter');
   const filterYear = filter.querySelector('.filter__year');
 
+  // init all words at start
+  getWordsByTerms();
+
   filterLetter.addEventListener('click', (e) => {
     addSpinner('.slovnik-list');
     if (e.target.classList.contains('active')) {
@@ -386,7 +389,7 @@ function filtersInit() {
                 ${item.title.rendered}
               </h3>
               <div class="word__caption col">
-                ${caption}
+                <!-- ${caption} -->
               </div> 
               
               <div class="share"><a class="btn btn-share" data-link="${item.link}"  data-title="${item.title.rendered}" data-desc="${item.acf.kratkoe_opisanie}">Поделиться </a><span></span></div>
