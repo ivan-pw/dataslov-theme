@@ -87,7 +87,8 @@ window.addEventListener('DOMContentLoaded', () => {
     libraryFiltersInit();
     document
       .querySelector(
-        `article .library-filter .library-filter__year .library-filter__item[data-term-name="${new Date().getFullYear()}"]`
+        // `article .library-filter .library-filter__year .library-filter__item[data-term-name="${new Date().getFullYear()}"]`
+        `article .library-filter .library-filter__year .library-filter__item:last-child`
       )
       .click();
   }
@@ -357,7 +358,7 @@ function filtersInit() {
   });
 
   function getWordsByTerms(letterId, yearId) {
-    let url = domain + '/wp-json/wp/v2/word?';
+    let url = domain + '/wp-json/wp/v2/word?per_page=100&';
     url += letterId > 0 ? `word_letter=${letterId}&` : '';
     url += yearId > 0 ? `word_year=${yearId}` : '';
 
@@ -523,7 +524,8 @@ function startSlider() {
   });
 
   // like init
-  circleContainer.querySelector(`li[data-year="${new Date().getFullYear()}"]`).click();
+  // circleContainer.querySelector(`li[data-year="${new Date().getFullYear()}"]`).click();
+  circleContainer.querySelector(`li:last-child`).click();
 
   function onSliderInit(yearEl) {
     // console.log(yearEl);
