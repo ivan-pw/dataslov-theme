@@ -33,7 +33,7 @@ window.addEventListener('DOMContentLoaded', () => {
   const circleContainer = document.querySelector('section.words-slider .circle-container');
 
   if (circleContainer) {
-    fetch(domain + '/wp-json/wp/v2/word_year')
+    fetch(domain + '/wp-json/wp/v2/word_year?filter[orderby]=created&order=desc')
       .then((response) => {
         return response.json();
       })
