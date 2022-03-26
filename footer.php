@@ -8,6 +8,7 @@
                         <li><a href="mailto:info@dataslov.ru"><i class="fa fa-envelope" aria-hidden="true"></i> <span> info@dataslov.ru</span></a></li>
                         <li><a href="tel:8(812)363-61-11"><i class="fa fa-phone" aria-hidden="true"></i><span> 8(812)363-61-11, доб. 3429</span></a></li>
                         <li><i class="fa fa-map-marker" aria-hidden="true"></i><span>Санкт-Петербург, <br />1-я линия В.О., <br />д. 26, к. 703</span></li>
+                        <li><a href="https://vk.com/dataslov" target="_blank"><i class="fa  fa-vk" aria-hidden="true"></i><span class="mt-1">VK<br /></span></a></li>
                     </ul>
                 </div>
             </div>
