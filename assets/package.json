@@ -36,7 +36,7 @@
     "analog-clock": "^1.0.0",
     "animejs": "^3.2.0",
     "bootstrap": "^4.5.0",
-    "gsap": "^2.1.3",
+    "gsap": "^3.6.0",
     "imagesloaded": "^4.1.4",
     "jquery": "^3.5.1",
     "popper.js": "^1.16.1",
