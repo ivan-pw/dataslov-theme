@@ -120,6 +120,7 @@ body {
     font-size: 1.3em;
     cursor: pointer;
     margin-right: 5px;
+    text-decoration: none !important;
 
     i {
       width: 1.3em;
@@ -296,7 +297,8 @@ body.home {
         &:after {
           content: '';
 
-          background: url('./../../img/full-back.png') no-repeat top left / cover;
+          background: url('./../../img/full-back.png') no-repeat top left /
+            cover;
           display: block;
           width: 100vw;
           top: 0px;
@@ -740,7 +742,8 @@ section.words-slider {
       right: 0;
       width: 100vw;
       height: 100%;
-      background: linear-gradient(116.57deg, #0f4c81 4.61%, #357ec3 105.19%), #0f4c81;
+      background: linear-gradient(116.57deg, #0f4c81 4.61%, #357ec3 105.19%),
+        #0f4c81;
       z-index: 0;
     }
   }
@@ -870,7 +873,8 @@ section.conception {
 }
 
 section.howto {
-  background: linear-gradient(117.21deg, #0f4c81 4.61%, #357ec3 105.19%), #0f4c81;
+  background: linear-gradient(117.21deg, #0f4c81 4.61%, #357ec3 105.19%),
+    #0f4c81;
   color: #fff;
   overflow: hidden;
   position: relative;
@@ -987,7 +991,14 @@ section.team {
     border-width: 1px;
     border-style: solid;
     -o-border-image: linear-gradient(180deg, #fff, #0f4c81) 1 100%;
-    border-image: -webkit-gradient(linear, left top, left bottom, from(#fff), to(#0f4c81)) 1 100%;
+    border-image: -webkit-gradient(
+        linear,
+        left top,
+        left bottom,
+        from(#fff),
+        to(#0f4c81)
+      )
+      1 100%;
     border-image: linear-gradient(180deg, #fff, #0f4c81) 1 100%;
     border-right: none;
     padding-left: 15px;
@@ -1022,7 +1033,8 @@ section.team {
 }
 
 footer {
-  background: linear-gradient(139.77deg, #0f4c81 4.61%, #357ec3 105.19%), #0f4c81;
+  background: linear-gradient(139.77deg, #0f4c81 4.61%, #357ec3 105.19%),
+    #0f4c81;
   color: #ffffffc7;
   padding: 80px 0;
 
@@ -1563,7 +1575,8 @@ section.linked-articles {
     margin-top: 100px;
     margin-left: 20vw;
     color: #fff;
-    background: linear-gradient(128.83deg, #0f4c81 4.61%, #357ec3 105.19%), #0f4c81;
+    background: linear-gradient(128.83deg, #0f4c81 4.61%, #357ec3 105.19%),
+      #0f4c81;
     border-radius: 10px;
 
     .onmap__box {
